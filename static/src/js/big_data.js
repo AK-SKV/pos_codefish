@@ -325,6 +325,40 @@ odoo.define('pos_retail.big_data', function (require) {
                 }
                 if (self.database && self.database['product.product'] && self.database['product.product'].length && self.database['res.partner'] && self.database['res.partner'].length) {
                     self.load_datas(self.database);
+                } else {	
+                    return rpc.query({	
+                        model: 'pos.cache.database',	
+                        method: 'load_master_data',	
+                        args: [condition],	
+                    }).then(function (database) {	
+                        if (database) {	
+                            self.load_datas(database);	
+                        } else {	
+                            return $.when(self.first_install('product.pricelist')).then(function () {	
+                                return $.when(self.first_install('product.pricelist.item')).then(function () {	
+                                    return $.when(self.first_install('product.product')).then(function () {	
+                                        return $.when(self.first_install('res.partner')).then(function () {	
+                                            return $.when(self.first_install('account.invoice')).then(function () {	
+                                                return $.when(self.first_install('account.invoice.line')).then(function () {	
+                                                    return $.when(self.first_install('pos.order')).then(function () {	
+                                                        return $.when(self.first_install('pos.order.line')).then(function () {	
+                                                            return $.when(self.first_install('sale.order')).then(function () {	
+                                                                return $.when(self.first_install('sale.order.line')).then(function () {	
+                                                                    return true;	
+                                                                })	
+                                                            })	
+                                                        })	
+                                                    })	
+                                                })	
+                                            })	
+                                        })	
+                                    })	
+                                })	
+                            })	
+                        }	
+                    }).fail(function (type, error) {	
+                        return self.pos.query_backend_fail(type, error);	
+                    });	
                 }
             }).then(function () {
                 self.save_parameter_models_load();

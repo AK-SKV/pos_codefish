@@ -4,7 +4,6 @@ odoo.define('pos_retail.big_data', function (require) {
     var _t = core._t;
     var rpc = require('pos.rpc');
     var ParameterDB = require('pos_retail.parameter');
-    var ParameterDB = require('pos_retail.parameter');
     var session = require('web.session');
     var change = require('pos_retail.pos_chanel');
 
@@ -34,6 +33,8 @@ odoo.define('pos_retail.big_data', function (require) {
             }
             this.models = this.model_unlock;
             this.stock_datas = session.stock_datas;
+            this.stocks = session.stocks;
+            this.products_stock = {};
             this.ParameterDB = new ParameterDB({});
             var config_id = this.ParameterDB.load(session.db + '_config_id');
             if (config_id) {
@@ -91,7 +92,7 @@ odoo.define('pos_retail.big_data', function (require) {
                             keyPath: model.model,
                         })
                     } catch (e) {
-                        cosole.log(e);
+                        console.log(e);
                     }
 
                 }
@@ -152,7 +153,7 @@ odoo.define('pos_retail.big_data', function (require) {
                             var model = cursor.source.name;
                             var new_caches = self.database[model];
                             if (model == 'product.product' && self.version.server_version_info[0] == 10) {
-                                for (var i=0; i < new_caches.length; i++) {
+                                for (var i = 0; i < new_caches.length; i++) {
                                     if (typeof new_caches[i]['product_tmpl_id'] === "number") {
                                         new_caches[i]['product_tmpl_id'] = [new_caches[i]['product_tmpl_id'], new_caches[i]['display_name']]
                                     }
@@ -296,6 +297,18 @@ odoo.define('pos_retail.big_data', function (require) {
                             if (this.stock_datas[product['id']]) {
                                 product['qty_available'] = this.stock_datas[product['id']]
                             }
+                            product['stocks'] = {};
+                            for (var j = 0; j < this.stock_locations.length; j++) {
+                                var location = this.stock_locations[j];
+                                if (this.stocks[location.id]) {
+                                    var qty_available_by_location = _.find(this.stocks[location.id], function (qty, product_id) {
+                                        return product.id == parseInt(product_id)
+                                    })
+                                    if (qty_available_by_location) {
+                                        product['stocks'][location.id] = qty_available_by_location;
+                                    }
+                                }
+                            }
                         }
                         this.products = results;
                     }
@@ -325,40 +338,40 @@ odoo.define('pos_retail.big_data', function (require) {
                 }
                 if (self.database && self.database['product.product'] && self.database['product.product'].length && self.database['res.partner'] && self.database['res.partner'].length) {
                     self.load_datas(self.database);
-                } else {	
-                    return rpc.query({	
-                        model: 'pos.cache.database',	
-                        method: 'load_master_data',	
-                        args: [condition],	
-                    }).then(function (database) {	
-                        if (database) {	
-                            self.load_datas(database);	
-                        } else {	
-                            return $.when(self.first_install('product.pricelist')).then(function () {	
-                                return $.when(self.first_install('product.pricelist.item')).then(function () {	
-                                    return $.when(self.first_install('product.product')).then(function () {	
-                                        return $.when(self.first_install('res.partner')).then(function () {	
-                                            return $.when(self.first_install('account.invoice')).then(function () {	
-                                                return $.when(self.first_install('account.invoice.line')).then(function () {	
-                                                    return $.when(self.first_install('pos.order')).then(function () {	
-                                                        return $.when(self.first_install('pos.order.line')).then(function () {	
-                                                            return $.when(self.first_install('sale.order')).then(function () {	
-                                                                return $.when(self.first_install('sale.order.line')).then(function () {	
-                                                                    return true;	
-                                                                })	
-                                                            })	
-                                                        })	
-                                                    })	
-                                                })	
-                                            })	
-                                        })	
-                                    })	
-                                })	
-                            })	
-                        }	
-                    }).fail(function (type, error) {	
-                        return self.pos.query_backend_fail(type, error);	
-                    });	
+                } else {
+                    return rpc.query({
+                        model: 'pos.cache.database',
+                        method: 'load_master_data',
+                        args: [condition],
+                    }).then(function (database) {
+                        if (database) {
+                            self.load_datas(database);
+                        } else {
+                            return $.when(self.first_install('product.pricelist')).then(function () {
+                                return $.when(self.first_install('product.pricelist.item')).then(function () {
+                                    return $.when(self.first_install('product.product')).then(function () {
+                                        return $.when(self.first_install('res.partner')).then(function () {
+                                            return $.when(self.first_install('account.invoice')).then(function () {
+                                                return $.when(self.first_install('account.invoice.line')).then(function () {
+                                                    return $.when(self.first_install('pos.order')).then(function () {
+                                                        return $.when(self.first_install('pos.order.line')).then(function () {
+                                                            return $.when(self.first_install('sale.order')).then(function () {
+                                                                return $.when(self.first_install('sale.order.line')).then(function () {
+                                                                    return true;
+                                                                })
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        }
+                    }).fail(function (type, error) {
+                        return self.pos.query_backend_fail(type, error);
+                    });
                 }
             }).then(function () {
                 self.save_parameter_models_load();
@@ -396,7 +409,7 @@ odoo.define('pos_retail.big_data', function (require) {
                     model: 'res.currency',
                     method: 'search_read',
                     domain: [['active', '=', true]],
-                    fields: ['name','symbol','position','rounding', 'rate'],
+                    fields: ['name', 'symbol', 'position', 'rounding', 'rate'],
                 }).then(function (currencies) {
                     self.multi_currency = currencies;
                 });

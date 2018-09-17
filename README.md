@@ -1,14 +1,14 @@
 # POS Advanced Futuers
 MAIN FUTURES LIST
 
-  Supported large datas. 100k to 999k products, customers. Fast start pos sessions for selling products
-  Tracking all actions of pos sessions
-  Daily report sale total by day, month
-  Z-Report by cashiers, by date input
-  Scan barcode of Lot serial number
-  Auto suggestion lot name with product selected
-  Quickly add partners, products and payment order
-  Sale suggestion for cashiers fast selling products
+  - Supported large datas. 100k to 999k products, customers. Fast start pos sessions for selling products
+  - Tracking all actions of pos sessions
+  - Daily report sale total by day, month
+  - Z-Report by cashiers, by date input
+  - Scan barcode of Lot serial number
+  - Auto suggestion lot name with product selected
+  - Quickly add partners, products and payment order
+  - Sale suggestion for cashiers fast selling products
   Re-directly odoo login of cashiers, waiters to POS screen
   Note to order
   Note to order line
@@ -52,4 +52,4 @@ MAIN FUTURES LIST
   Customer screen, show detail order of customer
   Quickly add products, customers, payment ...
   POS auto default customer
-  POS ticket setting font-size
+  POS ticket setting font-size****__

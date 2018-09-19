@@ -131,7 +131,7 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background: #0b2e59;
+
 }
 .pos .categories {
     border-bottom: solid 1px rgb(110, 200, 155);
@@ -1084,8 +1084,8 @@
     height: 50px;
 }
 .pos .left_button {
-    max-width: 60px;
-    max-height: 70px;
+    max-width: 80px;
+    max-height: 80px;
     text-align: center;
     font-weight: bold;
     background: none;
@@ -1279,3 +1279,14 @@
     background: #0b2e59;
 }
 
+.pos .product .product-name{
+    color: black;
+}
+
+.pos .custom-icon{
+    width: 62%;
+    text-align: center;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 8px;
+}

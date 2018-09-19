@@ -95,18 +95,7 @@ class pos_controller(PosController):
             request.env.cr.execute("select max(id) from %s" % table)
             max_ids = request.env.cr.fetchall()
             session_info['model_ids'][object]['max_id'] = max_ids[0][0] if max_ids and max_ids[0] else 1
-        session_info['pos_cache_database'] = cache_model.load_master_data({
-            'product.product': True, 
-            'pos.order.line': True, 
-            'res.partner': True, 
-            'account.invoice': True, 
-            'product.pricelist.item': True, 
-            'sale.order.line': True, 
-            'product.pricelist': True, 
-            'account.invoice.line': True, 
-            'sale.order': True, 
-            'pos.order': True
-        })
+        #session_info['pos_cache_database'] = cache_model.load_master_data()
         context = {
             'session_info': json.dumps(session_info)
         }

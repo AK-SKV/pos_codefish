@@ -183,18 +183,25 @@ odoo.define('pos_retail.screens', function (require) {
             this._super();
             $('.show_hide_pads').click(function () {
                 if (!self.pos.hide_pads || self.pos.hide_pads == false) {
-                    $('.actionpad').animate({height: 0}, 'slow');
-                    $('.numpad').animate({height: 0}, 'slow');
+                    $('.actionpad').animate({height: 0}, 'fast');
+                    $('.numpad').animate({height: 0}, 'fast');
                     $('.show_hide_pads').toggleClass('fa-caret-down fa-caret-up');
                     self.pos.hide_pads = true;
                 } else {
                     $('.breadcrumbs').removeClass('oe_hidden');
-                    $('.actionpad').animate({height: '100%'}, 'slow');
-                    $('.numpad').animate({height: '100%'}, 'slow');
+                    $('.actionpad').animate({height: '100%'}, 'fast');
+                    $('.numpad').animate({height: '100%'}, 'fast');
                     $('.show_hide_pads').toggleClass('fa-caret-down fa-caret-up');
                     self.pos.hide_pads = false;
                 }
             });
+            this.pos.bind('change:selectedOrder', function () {
+                if (self.pos.hide_pads) {
+                    $('.actionpad').animate({height: 0}, 'fast');
+                    $('.numpad').animate({height: 0}, 'fast');
+                    $('.show_hide_pads').toggleClass('fa-caret-down fa-caret-up');
+                }
+            }, this);
         },
     });
 
@@ -210,14 +217,15 @@ odoo.define('pos_retail.screens', function (require) {
         show: function () {
             var self = this;
             this._super();
-            if (this.pos.show_left_buttons) {
-                $('.buttons_pane').animate({width: 220}, 'fast');
-                $('.leftpane').animate({left: 220}, 'fast');
-                $('.rightpane').animate({left: 660}, 'fast');
+            if (this.pos.show_left_buttons == true) {
+                $('.buttons_pane').animate({width: 300}, 'fast');
+                $('.leftpane').animate({left: 300}, 'fast');
+                $('.rightpane').animate({left: 740}, 'fast');
                 $('.show_hide_buttons').removeClass('highlight');
-                $('.show_hide_buttons .fa-caret-right').toggleClass('fa fa-caret-right fa fa-list');
+                $('.show_hide_buttons .fa-caret-right').toggleClass('fa fa-caret-right fa fa fa-caret-left');
                 this.pos.show_left_buttons = true;
-            } else {
+            }
+            if (this.pos.show_left_buttons == false) {
                 $('.buttons_pane').animate({width: 0}, 'fast');
                 $('.leftpane').animate({left: 0}, 'fast');
                 $('.rightpane').animate({left: 440}, 'fast');
@@ -226,6 +234,7 @@ odoo.define('pos_retail.screens', function (require) {
                 $('.show_hide_buttons .fa-list').toggleClass('fa fa-list fa fa-caret-right');
                 this.pos.show_left_buttons = false;
             }
+            $('.show_hide_buttons').addClass('highlight');
             // -------------------------------
             // quickly add product
             // quickly add customer
@@ -379,6 +388,9 @@ odoo.define('pos_retail.screens', function (require) {
                 self.$('.category-list-scroller').remove();
                 self.$('.categories').remove();
                 self.product_categories_widget.replace(self.$('.rightpane-header'));
+                $('input').click(function () {
+                    self.pos.trigger('remove:keyboard_order');
+                })
             })
             this.$('.product_box').click(function () {
                 self.pos.config.product_view = 'box';
@@ -395,6 +407,9 @@ odoo.define('pos_retail.screens', function (require) {
                 self.$('.category-list-scroller').remove();
                 self.$('.categories').remove();
                 self.product_categories_widget.replace(self.$('.rightpane-header'));
+                $('input').click(function () {
+                    self.pos.trigger('remove:keyboard_order');
+                })
             });
             this.$('.lock_session').click(function () {
                 $('.pos-content').addClass('oe_hidden');
@@ -589,7 +604,7 @@ odoo.define('pos_retail.screens', function (require) {
                 }
             });
             this.pos.bind('reload:screen_products', function () {
-                if (self.pos.odoo_version == 11) {
+                if (self.pos.server_version == 11) {
                     self.product_cache = new screens.DomCache();
                     self.pos.db.product_by_id = {};
                     self.pos.db.product_by_category_id = {};
@@ -767,6 +782,8 @@ odoo.define('pos_retail.screens', function (require) {
                 'order': _.bind(self.barcode_order_return_action, self),
             });
             if (this.pos.config.is_customer_screen) {
+                $('.search_products').css('display', 'none');
+                $('.pos .order-selector').css('display', 'none');
                 $('.pos .leftpane').css('left', '0px');
                 $('.pos .rightpane').css('left', '440px');
                 $('.show_hide_buttons').remove()
@@ -1026,7 +1043,6 @@ odoo.define('pos_retail.screens', function (require) {
             var order = this.pos.get_order();
             var line = order.get_selected_orderline();
             if (line) {
-                this.remove_event_keyboard();
                 this.add_event_keyboard()
                 this.inputbuffer = "";
                 this.firstinput = true;
@@ -1058,13 +1074,14 @@ odoo.define('pos_retail.screens', function (require) {
             }
         },
         add_event_keyboard: function () {
-            this.remove_event_keyboard();
+            console.log('on keyboard event');
             $('body').keypress(this.keyboard_handler);
             $('body').keydown(this.keyboard_keydown_handler);
             window.document.body.addEventListener('keypress', this.keyboard_handler);
             window.document.body.addEventListener('keydown', this.keyboard_keydown_handler);
         },
         remove_event_keyboard: function () {
+            console.log('off keyboard event');
             $('body').off('keypress', this.keyboard_handler);
             $('body').off('keydown', this.keyboard_keydown_handler);
             window.document.body.removeEventListener('keypress', this.keyboard_handler);

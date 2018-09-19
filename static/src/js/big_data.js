@@ -36,13 +36,10 @@ odoo.define('pos_retail.big_data', function (require) {
             if (!this.stock_datas) {
                 this.stock_datas = {};
             }
-<<<<<<< HEAD
             this.pos_cache_database = session.pos_cache_database;
             if (!this.pos_cache_database) {
                 this.pos_cache_database = false;
             }
-=======
->>>>>>> 1dba94e2b4b186924b102dcd2fab2a9057386bca
             this.ParameterDB = new ParameterDB({});
             var config_id = this.ParameterDB.load(session.db + '_config_id');
             if (config_id) {
@@ -360,15 +357,8 @@ odoo.define('pos_retail.big_data', function (require) {
                                     })
                                 })
                             })
-<<<<<<< HEAD
                         })
                     }
-=======
-                        }
-                    }).fail(function (type, error) {
-                        return self.query_backend_fail(type, error);
-                    });
->>>>>>> 1dba94e2b4b186924b102dcd2fab2a9057386bca
                 }
             }).then(function () {
                 self.save_parameter_models_load();

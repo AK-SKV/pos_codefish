@@ -890,3 +890,11 @@ background-color: #0b2e59
 .pos .pos-sale-ticket{
     direction: rtl;
 }
+
+.pos .order .orderline .price{
+    direction: rtl;
+}
+
+.pos .order .summary .line .subentry > span{
+    float: left;
+}

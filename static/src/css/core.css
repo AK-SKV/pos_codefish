@@ -103,7 +103,7 @@
 }
 
 .pos .leftpane {
-    left: 220px;
+    left: 300px;
 }
 .pos .btn {
     background-color: #e2e2e2;
@@ -1062,7 +1062,7 @@
     font-weight: bold;
 }
 .pos .rightpane {
-    left: 660px;
+    left: 740px;
     border-right: none;
 }
 .pos .collapse .in {

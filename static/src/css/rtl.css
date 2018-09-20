@@ -11,38 +11,38 @@
   font-family: 'Cairo';
   font-style: normal;
   font-weight: 400;
-  src: url(/web_rtl_codefish/static/src/fonts/Cairo-Regular.eot);
-  src: url(/web_rtl_codefish/static/src/fonts/Cairo-Regular.woff2) format('woff2'),
-       url(/web_rtl_codefish/static/src/fonts/Cairo-Regular.woff) format('woff'),
-       url(/web_rtl_codefish/static/src/fonts/Cairo-Regular.ttf) format('truetype');
+  src: url(/pos_retail/static/src/fonts/Cairo-Regular.eot);
+  src: url(/pos_retail/static/src/fonts/Cairo-Regular.woff2) format('woff2'),
+       url(/pos_retail/static/src/fonts/Cairo-Regular.woff) format('woff'),
+       url(/pos_retail/static/src/fonts/Cairo-Regular.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Cairo';
   font-style: normal;
   font-weight: 700;
-  src: url(/web_rtl_codefish/static/src/fonts/Cairo-Bold.eot);
-  src: url(/web_rtl_codefish/static/src/fonts/Cairo-Bold.woff2) format('woff2'),
-       url(/web_rtl_codefish/static/src/fonts/Cairo-Bold.woff) format('woff'),
-       url(/web_rtl_codefish/static/src/fonts/Cairo-Bold.ttf) format('truetype');
+  src: url(/pos_retail/static/src/fonts/Cairo-Bold.eot);
+  src: url(/pos_retail/static/src/fonts/Cairo-Bold.woff2) format('woff2'),
+       url(/pos_retail/static/src/fonts/Cairo-Bold.woff) format('woff'),
+       url(/pos_retail/static/src/fonts/Cairo-Bold.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Cairo';
   font-style: normal;
   font-weight: 400;
-  src: url(/web_rtl_codefish/static/src/fonts/Cairo-Regular.eot);
-  src: url(/web_rtl_codefish/static/src/fonts/Cairo-Regular.woff2) format('woff2'),
-       url(/web_rtl_codefish/static/src/fonts/Cairo-Regular.woff) format('woff'),
-       url(/web_rtl_codefish/static/src/fonts/Cairo-Regular.ttf) format('truetype');
+  src: url(/pos_retail/static/src/fonts/Cairo-Regular.eot);
+  src: url(/pos_retail/static/src/fonts/Cairo-Regular.woff2) format('woff2'),
+       url(/pos_retail/static/src/fonts/Cairo-Regular.woff) format('woff'),
+       url(/pos_retail/static/src/fonts/Cairo-Regular.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Cairo';
   font-style: normal;
   font-weight: 700;
-  src: url(/web_rtl_codefish/static/src/fonts/Cairo-Bold.eot);
-  src: url(/web_rtl_codefish/static/src/fonts/Cairo-Bold.woff2) format('woff2'),
-       url(/web_rtl_codefish/static/src/fonts/Cairo-Bold.woff) format('woff'),
-       url(/web_rtl_codefish/static/src/fonts/Cairo-Bold.ttf) format('truetype');
+  src: url(/pos_retail/static/src/fonts/Cairo-Bold.eot);
+  src: url(/pos_retail/static/src/fonts/Cairo-Bold.woff2) format('woff2'),
+       url(/pos_retail/static/src/fonts/Cairo-Bold.woff) format('woff'),
+       url(/pos_retail/static/src/fonts/Cairo-Bold.ttf) format('truetype');
 }
 
 /*
@@ -52,37 +52,37 @@
   font-family: 'Amiri';
   font-style: italic;
   font-weight: 400;
-  src: url(/web_rtl_codefish/static/src/fonts/Amiri-Slanted.eot);
-  src: url(/web_rtl_codefish/static/src/fonts/Amiri-Slanted.woff2) format('woff2'),
-       url(/web_rtl_codefish/static/src/fonts/Amiri-Slanted.woff) format('woff'),
-       url(/web_rtl_codefish/static/src/fonts/Amiri-Slanted.ttf) format('truetype');
+  src: url(/pos_retail/static/src/fonts/Amiri-Slanted.eot);
+  src: url(/pos_retail/static/src/fonts/Amiri-Slanted.woff2) format('woff2'),
+       url(/pos_retail/static/src/fonts/Amiri-Slanted.woff) format('woff'),
+       url(/pos_retail/static/src/fonts/Amiri-Slanted.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Amiri';
   font-style: normal;
   font-weight: 400;
-  src: url(/web_rtl_codefish/static/src/fonts/Amiri-Regular.eot);
-  src: url(/web_rtl_codefish/static/src/fonts/Amiri-Regular.woff2) format('woff2'),
-       url(/web_rtl_codefish/static/src/fonts/Amiri-Regular.woff) format('woff'),
-       url(/web_rtl_codefish/static/src/fonts/Amiri-Regular.ttf) format('truetype');
+  src: url(/pos_retail/static/src/fonts/Amiri-Regular.eot);
+  src: url(/pos_retail/static/src/fonts/Amiri-Regular.woff2) format('woff2'),
+       url(/pos_retail/static/src/fonts/Amiri-Regular.woff) format('woff'),
+       url(/pos_retail/static/src/fonts/Amiri-Regular.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Amiri';
   font-style: italic;
   font-weight: 700;
-  src: url(/web_rtl_codefish/static/src/fonts/Amiri-BoldSlanted.eot);
-  src: url(/web_rtl_codefish/static/src/fonts/Amiri-BoldSlanted.woff2) format('woff2'),
-       url(/web_rtl_codefish/static/src/fonts/Amiri-BoldSlanted.woff) format('woff'),
-       url(/web_rtl_codefish/static/src/fonts/Amiri-BoldSlanted.ttf) format('truetype');
+  src: url(/pos_retail/static/src/fonts/Amiri-BoldSlanted.eot);
+  src: url(/pos_retail/static/src/fonts/Amiri-BoldSlanted.woff2) format('woff2'),
+       url(/pos_retail/static/src/fonts/Amiri-BoldSlanted.woff) format('woff'),
+       url(/pos_retail/static/src/fonts/Amiri-BoldSlanted.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Amiri';
   font-style: normal;
   font-weight: 700;
-  src: url(/web_rtl_codefish/static/src/fonts/Amiri-Bold.eot);
-  src: url(/web_rtl_codefish/static/src/fonts/Amiri-Bold.woff2) format('woff2'),
-       url(/web_rtl_codefish/static/src/fonts/Amiri-Bold.woff) format('woff'),
-       url(/web_rtl_codefish/static/src/fonts/Amiri-Bold.ttf) format('truetype');
+  src: url(/pos_retail/static/src/fonts/Amiri-Bold.eot);
+  src: url(/pos_retail/static/src/fonts/Amiri-Bold.woff2) format('woff2'),
+       url(/pos_retail/static/src/fonts/Amiri-Bold.woff) format('woff'),
+       url(/pos_retail/static/src/fonts/Amiri-Bold.ttf) format('truetype');
 }
 
 .rtl{direction:rtl}

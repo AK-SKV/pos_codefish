@@ -16,7 +16,7 @@
                     <t t-if="cashregister.journal.pos_method_type != 'default'">
                         <div class="btn btn-success paymentmethod oe_hidden" t-att-data-id="cashregister.journal_id[0]">
                             <t t-esc="cashregister.journal_id[1]" />
-                              
+
                         </div>
                     </t>
                     <t t-set='index' t-value="index + 1"/>

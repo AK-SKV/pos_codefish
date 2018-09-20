@@ -1513,6 +1513,6 @@ odoo.define('pos_retail.model', function (require) {
             }
         })
     } catch (e) {
-        console.warn('->> version now is 10');
+        console.error('->> version now is 10');
     }
 });

@@ -44,18 +44,20 @@ odoo.define('pos_retail.chromes', function (require) {
         start: function () {
             var self = this;
             this._super();
-            $('.show_hide_buttons').click(function () {
-                if (self.pos.show_left_buttons == true || self.pos.show_left_buttons == undefined) {
-                    $('.buttons_pane').animate({width: 0}, 'fast');
-                    $('.leftpane').animate({left: 0}, 'fast');
-                    $('.rightpane').animate({left: 440}, 'fast');
+            $('.show_hide_buttons').click(function () { // do not add this.$
+                if (self.pos.show_left_buttons) {
+                    $('.buttons_pane').animate({width: 0}, 'slow');
+                    $('.leftpane').animate({left: 0}, 'slow');
+                    $('.rightpane').animate({left: 440}, 'slow');
+                    $('.show_hide_buttons').addClass('highlight');
                     $('.fa fa-list').toggleClass('highlight');
                     $('.show_hide_buttons .fa-list').toggleClass('fa fa-list fa fa-caret-right');
                     self.pos.show_left_buttons = false;
                 } else {
-                    $('.buttons_pane').animate({width: 300}, 'fast');
-                    $('.leftpane').animate({left: 300}, 'fast');
-                    $('.rightpane').animate({left: 740}, 'fast');
+                    $('.buttons_pane').animate({width: 220}, 'slow');
+                    $('.leftpane').animate({left: 220}, 'slow');
+                    $('.rightpane').animate({left: 660}, 'slow');
+                    $('.show_hide_buttons').removeClass('highlight');
                     $('.show_hide_buttons .fa-caret-right').toggleClass('fa fa-caret-right fa fa-list');
                     self.pos.show_left_buttons = true;
                 }
@@ -144,6 +146,7 @@ odoo.define('pos_retail.chromes', function (require) {
             }
         },
         renderElement: function () {
+            var self = this;
             this._super();
             if (!this.pos.config.allow_remove_order || this.pos.config.allow_remove_order == false || this.pos.config.staff_level == 'marketing' || this.pos.config.staff_level == 'waiter' || this.pos.config.staff_level == 'cashier' || this.pos.config.is_customer_screen) {
                 this.$('.deleteorder-button').replaceWith('');

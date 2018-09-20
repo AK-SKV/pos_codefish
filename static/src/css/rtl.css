@@ -898,3 +898,12 @@ background-color: #0b2e59
 .pos .order .summary .line .subentry > span{
     float: left;
 }
+
+.pos .order .orderline .info-list{
+    float: right;
+    direction: rtl;
+}
+
+.pos .order .summary .total{
+        direction: rtl;
+}

@@ -188,141 +188,214 @@
                 </t>
             </ul>
         </t>
-        <t t-jquery="span[class*='product-name']" t-operation="before">
+        <t t-jquery="li[t-attf-class*='orderline']" t-operation="replace">
             <t t-if="widget.pos.config.display_image_orderline">
-                <span>
-                    <img class='orderline_image' t-att-src="line.get_line_image()"/>
-                </span>
+                  <li t-attf-class="orderline #{ line.selected ? 'selected' : '' }">
+<table style="width: 100%;" >
+	<tbody>
+		<tr>
+			<td style="width: 35px;">
+				<span>
+					<img class='orderline_image' t-att-src="line.get_line_image()"/>
+				</span>
+			</td>
+			<td style="vertical-align: bottom;">
+				<span class="product-name">
+					<t t-esc="line.get_product().display_name"/>
+
+					<t t-if="line.get_product().tracking!=='none'">
+						<i t-attf-class="oe_link_icon fa fa-list oe_icon line-lot-icon #{line.has_valid_product_lot() ? 'oe_green' : 'oe_red' }"/>
+					</t>
+				</span>
+			</td>
+			<td>
+				<span class="price">
+					<t t-esc="widget.format_currency(line.get_display_price())"/>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<ul class="info-list">
+					<t t-if="line.get_quantity_str() !== '1' || line.selected ">
+						<li class="info">
+							<em>
+								<t t-esc="line.get_quantity_str()" />
+							</em>
+							<t t-esc="line.get_unit().name" />
+							at
+							<t t-esc="widget.format_currency(line.get_unit_display_price(),'Product Price')" />
+							/
+							<t t-esc="line.get_unit().name" />
+							-
+							<t t-esc="line.get_product().pharmacy_product_type" />
+						</li>
+					</t>
+					</ul>
+					</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<ul>
+					<t t-if="line.get_discount_str() !== '0'">
+						<li class="info">
+							With a
+							<em>
+								<t t-esc="line.get_discount_str()" />%
+							</em>
+							discount
+						</li>
+					</t>
+				</ul>
+				<t t-if="widget.pos.config.display_tax_orderline and line.get_tax() > 0">
+					<ul class="bus-info">
+						<li class="info">
+							<i class="fa fa-caret-right"/>Tax:
+							<t t-esc="widget.format_currency(line.get_tax())"/>
+						</li>
+					</ul>
+				</t>
+				<t t-if="widget.pos.config.display_amount_discount and line.get_discount_str() !== '0'">
+					<ul class="bus-info">
+						<li class="info">
+							Discount amount:
+							<t t-esc="widget.format_currency(line.get_price_discount())"/>
+						</li>
+					</ul>
+				</t>
+				<!-- combo items -->
+				<t t-if="line.combo_items">
+					<t t-foreach="line.combo_items" t-as="combo_item">
+						<ul class="bus-info">
+							<li class="info">
+								<i class="fa fa-caret-right"/>
+								<t t-esc="combo_item.product_id[1]" />
+								with quantity :
+								<t t-esc="combo_item.quantity * line['quantity']" />
+								<t t-if="combo_item.lot_number">
+									,Lot/Serial Number :
+									<t t-esc="combo_item.lot_number" />
+								</t>
+								<t t-if="combo_item.use_date">
+									Expired date of lot:
+									<t t-esc="combo_item.use_date" />
+								</t>
+							</li>
+						</ul>
+					</t>
+				</t>
+				<t t-if="line.is_return">
+					<ul class="bus-info">
+						<li class="return_line">
+							<i class="fa fa-bug"/>
+							Return line
+						</li>
+					</ul>
+				</t>
+				<t t-foreach="line.variants" t-as="variant">
+					<ul class="bus-info">
+						<li class="info">
+							<i class="fa fa-caret-right"/>
+							<t t-esc="variant.value_id[1]" />
+							<span class='price'>
+								<i class='fa fa-plus-circle'/>
+								<t t-esc="widget.format_currency(variant.price_extra, 'Price extra')" />
+							</span>
+						</li>
+					</ul>
+				</t>
+				<t t-if="line.promotion">
+					<ul class="bus-info">
+						<li class="info">
+							<i class="fa fa-gift"/>
+							<t t-esc="line.promotion_reason"/>
+						</li>
+					</ul>
+				</t>
+				<t t-if="line.pack_lot_lines and line.pack_lot_lines.models">
+					<t t-foreach="line.pack_lot_lines.models" t-as="lot_model">
+						<t t-if="lot_model['changed']['lot_name']">
+							<ul class="bus-info">
+								<li class="info">
+									<i class="fa fa-barcode"/>
+									<t t-esc="lot_model['changed']['lot_name']"/>
+								</li>
+								<t t-if="lot_model['attributes']['lot']">
+									<t t-if="lot_model['attributes']['lot']['barcode']">
+										<li class="info">
+											<i class="fa fa-barcode"/>
+											Barcode:
+											<t t-esc="lot_model['attributes']['lot']['barcode']"/>
+										</li>
+									</t>
+									<t t-if="lot_model['attributes']['lot']['life_date']">
+										<li class="info">
+											<i class="fa fa-caret-right"/>
+											<Expired></Expired> date:
+											<t t-esc="lot_model['attributes']['lot']['life_date']"/>
+										</li>
+									</t>
+								</t>
+							</ul>
+						</t>
+					</t>
+				</t>
+				<!-- sync -->
+				<t t-if="widget.pos.config.display_person_add_line">
+					<t t-if="line.session_info and line.session_info.user and line.session_info.date">
+						<ul class="bus-info">
+							<li class="info">
+								<i class="fa fa-caret-right"/>
+								<t t-esc="line.session_info.user.name"/> added at
+								<t t-esc="line.session_info.date"/>
+							</li>
+						</ul>
+					</t>
+				</t>
+				<!-- line note -->
+				<t t-if="line.get_line_note()">
+					<ul class="bus-info">
+						<li class="info">
+							<i class="fa fa-caret-right"/>
+							<t t-esc="line.get_line_note()" />
+						</li>
+					</ul>
+				</t>
+				<!-- display tags line -->
+				<t t-if="line.tags">
+					<ul class="bus-info">
+						<t t-foreach="line.tags" t-as="tag">
+							<li class='info' t-att-data-id="tag.id">
+								<i class="fa fa-caret-right"/>
+								<t t-esc="tag.name"/>
+							</li>
+						</t>
+					</ul>
+				</t>
+				<!-- discount reason -->
+				<t t-if="line.discount_reason">
+					<ul class="bus-info">
+						<li class="info">
+							<i class="fa fa-heart"/>
+							<t t-esc="line.discount_reason"/>
+						</li>
+					</ul>
+				</t>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+                      <p></p>
+                </li>
             </t>
         </t>
-        <t t-jquery="ul[class*='info-list']" t-operation="append">
-            <t t-if="widget.pos.config.display_tax_orderline and line.get_tax() > 0">
-                <ul class="bus-info">
-                    <li class="info">
-                        <i class="fa fa-caret-right"/>Tax: <t t-esc="widget.format_currency(line.get_tax())"/>
-                    </li>
-                </ul>
-            </t>
-            <t t-if="widget.pos.config.display_amount_discount and line.get_discount_str() !== '0'">
-                <ul class="bus-info">
-                    <li class="info">
-                        Discount amount: <t t-esc="widget.format_currency(line.get_price_discount())"/>
-                    </li>
-                </ul>
-            </t>
-            <!-- combo items -->
-            <t t-if="line.combo_items">
-                <t t-foreach="line.combo_items" t-as="combo_item">
-                    <ul class="bus-info">
-                        <li class="info">
-                            <i class="fa fa-caret-right"/>
-                            <t t-esc="combo_item.product_id[1]" />
-                            with quantity :
-                            <t t-esc="combo_item.quantity * line['quantity']" />
-                            <t t-if="combo_item.lot_number">
-                                ,Lot/Serial Number : <t t-esc="combo_item.lot_number" />
-                            </t>
-                            <t t-if="combo_item.use_date">
-                                Expired date of lot: <t t-esc="combo_item.use_date" />
-                            </t>
-                        </li>
-                    </ul>
-                </t>
-            </t>
-            <t t-if="line.is_return">
-                <ul class="bus-info">
-                    <li class="return_line">
-                        <i class="fa fa-bug"/>
-                        Return line
-                    </li>
-                </ul>
-            </t>
-            <t t-foreach="line.variants" t-as="variant">
-                <ul class="bus-info">
-                    <li class="info">
-                        <i class="fa fa-caret-right"/>
-                        <t t-esc="variant.value_id[1]" />
-                        <span class='price'>
-                            <i class='fa fa-plus-circle'/>
-                            <t t-esc="widget.format_currency(variant.price_extra, 'Price extra')" />
-                        </span>
-                    </li>
-                </ul>
-            </t>
-            <t t-if="line.promotion">
-                <ul class="bus-info">
-                    <li class="info">
-                        <i class="fa fa-gift"/>
-                        <t t-esc="line.promotion_reason"/>
-                    </li>
-                </ul>
-            </t>
-            <t t-if="line.pack_lot_lines and line.pack_lot_lines.models">
-                <t t-foreach="line.pack_lot_lines.models" t-as="lot_model">
-                    <t t-if="lot_model['changed']['lot_name']">
-                        <ul class="bus-info">
-                            <li class="info">
-                                <i class="fa fa-barcode"/>
-                                <t t-esc="lot_model['changed']['lot_name']"/>
-                            </li>
-                            <t t-if="lot_model['attributes']['lot']">
-                                <t t-if="lot_model['attributes']['lot']['barcode']">
-                                    <li class="info">
-                                        <i class="fa fa-barcode"/>
-                                        Barcode: <t t-esc="lot_model['attributes']['lot']['barcode']"/>
-                                    </li>
-                                </t>
-                                <t t-if="lot_model['attributes']['lot']['life_date']">
-                                    <li class="info">
-                                        <i class="fa fa-caret-right"/>
-                                        <Expired></Expired> date: <t t-esc="lot_model['attributes']['lot']['life_date']"/>
-                                    </li>
-                                </t>
-                            </t>
-                        </ul>
-                    </t>
-                </t>
-            </t>
-            <!-- sync -->
-            <t t-if="widget.pos.config.display_person_add_line">
-                <t t-if="line.session_info and line.session_info.user and line.session_info.date">
-                    <ul class="bus-info">
-                        <li class="info">
-                            <i class="fa fa-caret-right"/>
-                            <t t-esc="line.session_info.user.name"/> added at <t t-esc="line.session_info.date"/>
-                        </li>
-                    </ul>
-                </t>
-            </t>
-            <!-- line note -->
-            <t t-if="line.get_line_note()">
-                <ul class="bus-info">
-                    <li class="info">
-                        <i class="fa fa-caret-right"/>
-                        <t t-esc="line.get_line_note()" />
-                    </li>
-                </ul>
-            </t>
-            <!-- display tags line -->
-            <t t-if="line.tags">
-                <ul class="bus-info">
-                    <t t-foreach="line.tags" t-as="tag">
-                        <li class='info' t-att-data-id="tag.id">
-                            <i class="fa fa-caret-right"/><t t-esc="tag.name"/>
-                        </li>
-                    </t>
-                </ul>
-            </t>
-            <!-- discount reason -->
-            <t t-if="line.discount_reason">
-                <ul class="bus-info">
-                    <li class="info">
-                        <i class="fa fa-heart"/>
-                        <t t-esc="line.discount_reason"/>
-                    </li>
-                </ul>
-            </t>
-        </t>
+        <!--- <t t-jquery="li[t-attf-class*='orderline']" t-operation="replace">
+              <span class="price">
+                  <br></br>
+            <t t-esc="widget.format_currency(line.get_display_price())"/>
+            </span>
+        </t>-->
     </t>
 
     <t t-extend="OrderWidget">

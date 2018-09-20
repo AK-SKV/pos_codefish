@@ -1209,6 +1209,7 @@
 }
 .pos .order .orderline.selected .info-list .info {
     color: white;
+    font-size: medium;
 }
 .pos .order .orderline.selected .info-list em {
     color: white;
@@ -1289,4 +1290,8 @@
     padding-right: 5px;
     padding-left: 5px;
     padding-top: 8px;
+}
+
+.pos li{
+     font-size: medium;
 }

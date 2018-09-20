@@ -15,8 +15,6 @@ class pos_cache_database(models.Model):
 
     @api.model
     def load_master_data(self, condition={}):
-        _logger.info('begin load_master_data')
-        _logger.info(condition)
         database = {}
         domain = []
         for model, load in condition.items():
@@ -30,10 +28,8 @@ class pos_cache_database(models.Model):
                 vals = json.loads(cache['data'])
                 vals['write_date'] = cache['write_date']
                 database[cache['res_model']].append(vals)
-            _logger.info('end load_master_data')
             return database
         else:
-            _logger.error('end load_master_data')
             return False
 
     @api.model

@@ -26,7 +26,7 @@
     <t t-name="button_create_sale_order">
         <span class="product left_button">
             <div class="button_icon">
-                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Create-SO.png"/></i>
+                <i class='fa fa-shopping-bag' />
             </div>
             <div class="product-name button_text">
                 Create SO
@@ -224,7 +224,7 @@
     <t t-name="button_return_products">
         <span class="product left_button">
             <div class="button_icon">
-                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Fast-Return.png"/></i>
+                <i class='fa fa-building' />
             </div>
             <div class="product-name button_text">
                 Fast return
@@ -245,7 +245,7 @@
     <t t-name="product_operation_button">
         <span class="product left_button">
             <div class="button_icon">
-                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Products.png"/></i>
+                <i class='fa fa-barcode' />
             </div>
             <div class="product-name button_text">
                 Products
@@ -356,11 +356,11 @@
     <t t-name="button_go_sale_orders_screen">
         <span class="product left_button">
             <div class="button_icon">
-                <i><img class="custom-icon" src="/pos_retail/static/src/icons/WH-Stock.png"/></i>
+                <i class="fa fa-book"/>
             </div>
             <div class="product-name button_text">
                 Booked Orders
-
+                <span class="notification booked_orders">0</span>
             </div>
         </span>
     </t>
@@ -368,7 +368,7 @@
     <t t-name="button_go_pos_orders_screen">
         <span class="product left_button">
             <div class="button_icon">
-                <i><img class="custom-icon" src="/pos_retail/static/src/icons/POS-Orders.png"/></i>
+                <i class='fa fa-search' />
             </div>
             <div class="product-name button_text">
                 POS orders
@@ -379,7 +379,7 @@
     <t t-name="button_delivery_order">
         <span class="product left_button">
             <div class="button_icon">
-                <i><i><img class="custom-icon" src="/pos_retail/static/src/icons/Delivery-Orders.png"/></i></i>
+                <i class='fa fa-truck' />
             </div>
             <div class="product-name button_text">
                 Delivery order
@@ -414,7 +414,7 @@
     <t t-name="button_set_location">
         <span class="product left_button">
             <div class="button_icon">
-                <i><img class="custom-icon" src="/pos_retail/static/src/icons/WH-Stock.png"/></i>
+                <i class='fa fa-th' />
             </div>
             <div class="product-name button_text">
                 <t t-esc="widget.pos.get_location()['name']"/>
@@ -425,7 +425,7 @@
     <t t-name="button_restart_session">
         <span class="product left_button">
             <div class="button_icon">
-                <i><img class="custom-icon" src="/pos_retail/static/src/icons/User.png"/></i>
+                <i class='fa fa-user' />
             </div>
             <div class="product-name button_text">
                 <t t-esc="widget.pos.get_config()['name']"/>

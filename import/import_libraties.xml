@@ -43,6 +43,7 @@
             <script type="text/javascript" src="/pos_retail/static/src/js/packlot.js"/>
             <link rel="stylesheet" href="/pos_retail/static/src/css/core.css"/>
             <link rel="stylesheet" href="/pos_retail/static/src/css/synchronization.css"/>
+            <link t-if="lang_direction == 'rtl'" rel="stylesheet" href="/pos_retail/static/src/css/rtl.css"/>
             <!-- chat -->
             <link rel="stylesheet" href="/pos_retail/static/src/css/chat.css" />
             <script type="text/javascript" src="/pos_retail/static/src/js/chat.js"/>

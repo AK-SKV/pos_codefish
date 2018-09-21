@@ -1199,7 +1199,7 @@
     background: royalblue;
 }
 .pos .order .orderline.selected {
-    background: #22527b;
+    background: #0b2e59;
     color: white;
     font-size: 20px;
     height: auto;
@@ -1285,7 +1285,7 @@
 }
 
 .pos .custom-icon{
-    width: 62%;
+    width: 58%;
     text-align: center;
     padding-right: 5px;
     padding-left: 5px;

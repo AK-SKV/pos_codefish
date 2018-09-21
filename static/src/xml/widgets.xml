@@ -152,18 +152,18 @@
                             <t t-esc="widget.format_currency(product.list_price,'Product Price')"/>
                         </span>
                     </td>
-                    <td class="text-right">
+                 <!--   <td class="text-right">
                         <span class="price-tag text-right">
                             <t t-esc="widget.format_currency(product.standard_price, 'Product Price') + '/' + widget.pos.units_by_id[product.uom_id[0]].name"/>
                         </span>
-                    </td>
-                    <t t-if="widget.pos.server_version == 10">
+                    </td>-->
+                 <!--   <t t-if="widget.pos.server_version == 10">
                         <td class="text-right">
                             <span class="price-tag text-right">
                                 <t t-esc="widget.format_currency(widget.pos.get_price_with_tax(product, 1),'Product Price') + '/' + widget.pos.units_by_id[product.uom_id[0]].name"/>
                             </span>
                         </td>
-                    </t>
+                    </t> -->
                     <t t-if="widget.pos.server_version == 11">
                         <td class="text-right">
                             <span class="price-tag text-right">
@@ -536,8 +536,8 @@
                                             <th>Code</th>
                                             <th>UoM</th>
                                             <th>Sale</th>
-                                            <th>Cost</th>
-                                            <th>Within tax</th>
+                                        <!-- <th>Cost</th>
+                                           <th>Within tax</th>-->
                                             <th class="text-center">Available</th>
                                         </tr>
                                     </thead>
@@ -575,7 +575,7 @@
             <t t-if="widget.pos.config.product_view == 'box'">
                 <div class='product-list-container'>
                     <t t-if="widget.pos.config.allow_add_product">
-                        <div class="product-list-scroller touch-scrollable">
+                        <div class="product-list-scroller touch-scrollable" style="overflow: unset;">
                             <div class="product-list-re-comment" style="display:none">
                             </div>
                             <div class="product-list">

@@ -4,7 +4,7 @@
     <t t-name="button_create_internal_transfer">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-truck' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Internal-Transfer.png"/></i>
             </div>
             <div class="product-name button_text">
                 Internal Transfer
@@ -15,7 +15,7 @@
     <t t-name="button_create_purchase_order">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-truck' />
+               <i><img class="custom-icon" src="/pos_retail/static/src/icons/Create-PO.png"/></i>
             </div>
             <div class="product-name button_text">
                 Create PO
@@ -37,7 +37,7 @@
     <t t-name="button_combo">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-cubes' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Add-Pack Combo.png"/></i>
             </div>
             <div class="product-name button_text">
                 Add Pack/Combo
@@ -48,7 +48,7 @@
     <t t-name="button_combo_item_add_lot">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-sliders' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Pricelist.png"/></i>
             </div>
             <div class="product-name button_text">
                 Add lot combo items
@@ -59,7 +59,7 @@
     <t t-name="button_global_discount">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-heart' />
+               <i><img class="custom-icon" src="/pos_retail/static/src/icons/Global-Discount.png"/></i>
             </div>
             <div class="product-name button_text">
                 Global Discounts
@@ -70,7 +70,7 @@
     <t t-name="button_print_voucher">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-print' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Print-Voucher.png"/></i>
             </div>
             <div class="product-name button_text">
                 Print Voucher
@@ -180,7 +180,7 @@
     <t t-name="button_add_variants">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-sliders' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Add-Variants.png"/></i>
             </div>
             <div class="product-name button_text">
                 Add Variants
@@ -191,7 +191,7 @@
     <t t-name="button_promotion">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-gift' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Add-Promotion.png"/></i>
             </div>
             <div class="product-name button_text">
                 Add Promotions
@@ -262,7 +262,7 @@
     <t t-name="button_selection_pricelist">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-sliders' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Pricelist.png"/></i>
             </div>
             <div class="product-name button_text">
                 <t t-esc='widget.get_order_pricelist()'/>

@@ -14,7 +14,7 @@
         </div>
         <div class="oe_status js_proxy">
             <div class="js_connected oe_icon ">
-                <i class='fa fa-money'></i>
+                <i><img class="custom-header-icon" src="/pos_retail/static/src/icons/header_Icon/Money.png"/></i>
             </div>
             <div class="js_connected oe_icon">
                 <span class="notification amount_total">0</span>
@@ -22,7 +22,7 @@
         </div>
         <div class="oe_status js_proxy">
             <div class="js_connected oe_icon ">
-                <i class='fa fa-cart-plus'></i>
+                <i><img class="custom-header-icon" src="/pos_retail/static/src/icons/header_Icon/Orders.png"/></i>
             </div>
             <div class="js_connected oe_icon">
                 <span class="notification count_item">0</span>
@@ -30,7 +30,7 @@
         </div>
         <div class="oe_status js_proxy">
             <div class="js_connected oe_icon ">
-                <i class='fa fa-gift'></i>
+                <i><img class="custom-header-icon" src="/pos_retail/static/src/icons/header_Icon/Rewards.png"/></i>
             </div>
             <div class="js_connected oe_icon">
                 <span class="notification remain_point">0</span>

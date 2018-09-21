@@ -1295,3 +1295,8 @@
 .pos li{
      font-size: medium;
 }
+
+.pos .custom-header-icon{
+    width: 25px;
+    vertical-align: middle;
+}

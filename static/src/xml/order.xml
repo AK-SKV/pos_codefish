@@ -401,8 +401,9 @@
     <t t-extend="OrderWidget">
         <t t-jquery="div[class*='order-scroller touch-scrollable']" t-operation="before">
             <div class="searchbox search_products">
-                <input placeholder="Fast add products" class="ui-autocomplete-input" autocomplete="off" style="
-                    width: 100%;
+                <input placeholder="Fast add
+                       products" class="ui-autocomplete-input" autocomplete="off" style="
+                    width: 92%;
                     font-size: 14px;
                     border-top: none;
                     border-left: none;

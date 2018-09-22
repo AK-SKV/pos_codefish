@@ -2,7 +2,8 @@
 <templates id="template" xml:space="preserve">
 
     <t t-extend="PosTicket">
-        <t t-jquery="div[class*='pos-center-align']" t-operation="replace">
+        <t t-jquery="div[class*='pos-sale-ticket']" t-operation="replace">
+              <div class="pos-sale-ticket">
             <t t-if="order.formatted_validation_date">
                 <div class="pos-center-align"><t t-esc="order.formatted_validation_date"/> | <t t-esc="order.name"/></div>
             </t>
@@ -12,9 +13,10 @@
             <t t-if="order.date">
                 <div class="pos-center-align"><t t-esc="order.date"/> | <t t-esc="order.name"/></div>
             </t>
+                <t t-set="client" t-value="order.get_client()"/>
 
-        </t>
-        <t t-jquery="table[class*='receipt-orderlines']" t-operation="replace">
+                   Name: <t class="custom-ticket-client-name" t-esc="client['name']"/><br />
+
             <t t-if="widget.pos.config.category_wise_receipt">
                 <t t-set='index' t-value="1"/>
                 <tr t-foreach="receipt['orderlines_by_category_name']" t-as="category">
@@ -190,6 +192,9 @@
                     </tr>
                 </table>
             </t>
+              </div>
+
+
         </t>
         <t t-jquery="tr[class*='emph']" t-operation="after">
             <t t-if="order.amount_debit">

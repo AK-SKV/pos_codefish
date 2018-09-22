@@ -932,3 +932,11 @@ background-color: #0b2e59
 .pos .product-list{
     direction: rtl;
 }
+
+.payment-screen .paymentlines-empty .total{
+        direction: rtl;
+}
+
+.pos .paymentline.selected{
+    direction: rtl;
+}

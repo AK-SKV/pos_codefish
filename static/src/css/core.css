@@ -793,10 +793,11 @@
     min-width: 20px;
     padding: 3px 5px;
     height: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
     line-height: 19px;
     vertical-align: middle;
+    background: #346764;
 
 }
 .pos .orderline_image {
@@ -1310,3 +1311,10 @@
     font-size: initial;
 }
 
+.payment-screen .paymentlines-empty .total{
+    font-size: 50px;
+}
+
+custom-ticket-client-name{
+    text-align: left;
+}

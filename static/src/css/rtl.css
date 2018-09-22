@@ -919,3 +919,16 @@ background-color: #0b2e59
 .pos .searchbox input{
     direction: rtl;
 }
+
+.pos .actionpad .button.pay .pay-circle .fa {
+        left: auto;
+
+}
+
+.pos .product-list-scroller{
+    direction: ltr;
+}
+
+.pos .product-list{
+    direction: rtl;
+}

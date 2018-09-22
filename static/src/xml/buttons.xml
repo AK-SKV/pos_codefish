@@ -48,7 +48,7 @@
     <t t-name="button_combo_item_add_lot">
         <span class="product left_button">
             <div class="button_icon">
-                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Pricelist.png"/></i>
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Add-lot-combo-items.png"/></i>
             </div>
             <div class="product-name button_text">
                 Add lot combo items

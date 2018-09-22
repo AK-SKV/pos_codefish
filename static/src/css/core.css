@@ -161,6 +161,7 @@
     font-style: normal;
     color: white;
     border-right: none;
+    width: 670px;
 }
 
 .pos .amount_total {
@@ -1209,7 +1210,7 @@
 }
 .pos .order .orderline.selected .info-list .info {
     color: white;
-    font-size: medium;
+    font-size: initial;
 }
 .pos .order .orderline.selected .info-list em {
     color: white;
@@ -1221,7 +1222,7 @@
     background: #12ae8e;
 }
 .pos .pos-rightheader {
-    left: 320px;
+    left: 670px;
 }
 .pos .pos-rightheader > * {
     border-right: 0px solid #292929;
@@ -1300,3 +1301,12 @@
     width: 25px;
     vertical-align: middle;
 }
+
+.pos .order .orderline .product-name{
+    font-size: initial;
+}
+
+.pos .order .orderline .price{
+    font-size: initial;
+}
+

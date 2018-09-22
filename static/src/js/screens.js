@@ -183,18 +183,25 @@ odoo.define('pos_retail.screens', function (require) {
             this._super();
             $('.show_hide_pads').click(function () {
                 if (!self.pos.hide_pads || self.pos.hide_pads == false) {
-                    $('.actionpad').animate({height: 0}, 'slow');
-                    $('.numpad').animate({height: 0}, 'slow');
+                    $('.actionpad').animate({height: 0}, 'fast');
+                    $('.numpad').animate({height: 0}, 'fast');
                     $('.show_hide_pads').toggleClass('fa-caret-down fa-caret-up');
                     self.pos.hide_pads = true;
                 } else {
                     $('.breadcrumbs').removeClass('oe_hidden');
-                    $('.actionpad').animate({height: '100%'}, 'slow');
-                    $('.numpad').animate({height: '100%'}, 'slow');
+                    $('.actionpad').animate({height: '100%'}, 'fast');
+                    $('.numpad').animate({height: '100%'}, 'fast');
                     $('.show_hide_pads').toggleClass('fa-caret-down fa-caret-up');
                     self.pos.hide_pads = false;
                 }
             });
+            this.pos.bind('change:selectedOrder', function () {
+                if (self.pos.hide_pads) {
+                    $('.actionpad').animate({height: 0}, 'fast');
+                    $('.numpad').animate({height: 0}, 'fast');
+                    $('.show_hide_pads').toggleClass('fa-caret-down fa-caret-up');
+                }
+            }, this);
         },
     });
 
@@ -210,14 +217,15 @@ odoo.define('pos_retail.screens', function (require) {
         show: function () {
             var self = this;
             this._super();
-            if (this.pos.show_left_buttons) {
-                $('.buttons_pane').animate({width: 220}, 'fast');
-                $('.leftpane').animate({left: 220}, 'fast');
-                $('.rightpane').animate({left: 660}, 'fast');
+            if (this.pos.show_left_buttons == true) {
+                $('.buttons_pane').animate({width: 300}, 'fast');
+                $('.leftpane').animate({left: 300}, 'fast');
+                $('.rightpane').animate({left: 740}, 'fast');
                 $('.show_hide_buttons').removeClass('highlight');
-                $('.show_hide_buttons .fa-caret-right').toggleClass('fa fa-caret-right fa fa-list');
+                $('.show_hide_buttons .fa-caret-right').toggleClass('fa fa-caret-right fa fa fa-caret-left');
                 this.pos.show_left_buttons = true;
-            } else {
+            }
+            if (this.pos.show_left_buttons == false) {
                 $('.buttons_pane').animate({width: 0}, 'fast');
                 $('.leftpane').animate({left: 0}, 'fast');
                 $('.rightpane').animate({left: 440}, 'fast');
@@ -226,6 +234,7 @@ odoo.define('pos_retail.screens', function (require) {
                 $('.show_hide_buttons .fa-list').toggleClass('fa fa-list fa fa-caret-right');
                 this.pos.show_left_buttons = false;
             }
+            $('.show_hide_buttons').addClass('highlight');
             // -------------------------------
             // quickly add product
             // quickly add customer
@@ -379,6 +388,9 @@ odoo.define('pos_retail.screens', function (require) {
                 self.$('.category-list-scroller').remove();
                 self.$('.categories').remove();
                 self.product_categories_widget.replace(self.$('.rightpane-header'));
+                $('input').click(function () {
+                    self.pos.trigger('remove:keyboard_order');
+                })
             })
             this.$('.product_box').click(function () {
                 self.pos.config.product_view = 'box';
@@ -395,6 +407,9 @@ odoo.define('pos_retail.screens', function (require) {
                 self.$('.category-list-scroller').remove();
                 self.$('.categories').remove();
                 self.product_categories_widget.replace(self.$('.rightpane-header'));
+                $('input').click(function () {
+                    self.pos.trigger('remove:keyboard_order');
+                })
             });
             this.$('.lock_session').click(function () {
                 $('.pos-content').addClass('oe_hidden');
@@ -470,20 +485,19 @@ odoo.define('pos_retail.screens', function (require) {
                     return self.pos.gui.show_screen('receipt_review');
                 }
             });
-            var $product_screen_find_product_box = $('.product-screen .searchbox >input');
-            $product_screen_find_product_box.autocomplete({
+            var $order_screen_find_product_box = $('.search_products >input');
+            $order_screen_find_product_box.autocomplete({
                 source: this.pos.db.products_autocomplete,
                 minLength: this.pos.config.min_length_search,
                 select: function (event, ui) {
                     if (ui && ui['item'] && ui['item']['value'])
                         var product = self.pos.db.get_product_by_id(ui['item']['value']);
                     setTimeout(function () {
-                        $('.product-screen .searchbox >input')[1].value = '';
+                        $('.order-container .searchbox >input').value = '';
                     }, 10);
                     if (product) {
                         return self.pos.get_order().add_product(product);
                     }
-
                 }
             });
             var $find_customer_box = $('.find_customer >input');
@@ -500,14 +514,12 @@ odoo.define('pos_retail.screens', function (require) {
                                 input.value = '';
                                 input.focus();
                             }, 10);
-
                         }
                     }
                 }
             });
         }
     });
-
     screens.ActionButtonWidget.include({
         highlight: function (highlight) {
             this._super(highlight)
@@ -589,7 +601,7 @@ odoo.define('pos_retail.screens', function (require) {
                 }
             });
             this.pos.bind('reload:screen_products', function () {
-                if (self.pos.odoo_version == 11) {
+                if (self.pos.server_version == 11) {
                     self.product_cache = new screens.DomCache();
                     self.pos.db.product_by_id = {};
                     self.pos.db.product_by_category_id = {};
@@ -767,6 +779,8 @@ odoo.define('pos_retail.screens', function (require) {
                 'order': _.bind(self.barcode_order_return_action, self),
             });
             if (this.pos.config.is_customer_screen) {
+                $('.search_products').css('display', 'none');
+                $('.pos .order-selector').css('display', 'none');
                 $('.pos .leftpane').css('left', '0px');
                 $('.pos .rightpane').css('left', '440px');
                 $('.show_hide_buttons').remove()
@@ -869,9 +883,6 @@ odoo.define('pos_retail.screens', function (require) {
             this.line_mouse_move_handler = function (event) {
                 self.line_mouse_move(this.orderline, event);
             };
-            // ------------------------------
-            // keyboard for products screen
-            // ------------------------------
             this.inputbuffer = "";
             this.firstinput = true;
             this.decimal_point = _t.database.parameters.decimal_point;
@@ -885,10 +896,10 @@ odoo.define('pos_retail.screens', function (require) {
                     event.preventDefault();
                     self.keyboard_handler(event);
                 }
-                // if (event.keyCode === 38 || event.keyCode === 40) { // Up and Down
-                //     event.preventDefault();
-                //     self.change_line_selected(event.keyCode);
-                // }
+                if (event.keyCode === 38 || event.keyCode === 40) { // Up and Down
+                    event.preventDefault();
+                    self.change_line_selected(event.keyCode);
+                }
             };
             this.keyboard_handler = function (event) {
                 var current_screen = self.pos.gui.get_current_screen();
@@ -993,41 +1004,40 @@ odoo.define('pos_retail.screens', function (require) {
                 this.set_value(this.inputbuffer)
             }
         },
-        // change_line_selected: function (keycode) {
-        //     var order = this.pos.get_order();
-        //     var line_selected = order.get_selected_orderline();
-        //     if (!line_selected && order && order.orderlines.models.length > 0) {
-        //         this.pos.get_order().select_orderline(order.orderlines.models[0]);
-        //         this.numpad_state.reset();
-        //     }
-        //     if (line_selected && order && order.orderlines.models.length > 1) {
-        //         for (var i = 0; i < order.orderlines.models.length; i++) {
-        //             var line_check = order.orderlines.models[i];
-        //             if (line_check.cid == line_selected.cid) {
-        //                 if (keycode == 38) {
-        //                     if ((i - 1) >= 0) {
-        //                         var line_will_select = order.orderlines.models[i - 1];
-        //                         this.pos.get_order().select_orderline(line_will_select);
-        //                         this.numpad_state.reset();
-        //                         break;
-        //                     }
-        //                 } else {
-        //                     var line_will_select = order.orderlines.models[i + 1];
-        //                     this.pos.get_order().select_orderline(line_will_select);
-        //                     this.numpad_state.reset();
-        //                     break;
-        //                 }
-        //             }
-        //         }
-        //     }
-        // },
+        change_line_selected: function (keycode) {
+            var order = this.pos.get_order();
+            var line_selected = order.get_selected_orderline();
+            if (!line_selected && order && order.orderlines.models.length > 0) {
+                this.pos.get_order().select_orderline(order.orderlines.models[0]);
+                this.numpad_state.reset();
+            }
+            if (line_selected && order && order.orderlines.models.length > 1) {
+                for (var i = 0; i < order.orderlines.models.length; i++) {
+                    var line_check = order.orderlines.models[i];
+                    if (line_check.cid == line_selected.cid) {
+                        if (keycode == 38) {
+                            if ((i - 1) >= 0) {
+                                var line_will_select = order.orderlines.models[i - 1];
+                                this.pos.get_order().select_orderline(line_will_select);
+                                this.numpad_state.reset();
+                                break;
+                            }
+                        } else {
+                            var line_will_select = order.orderlines.models[i + 1];
+                            this.pos.get_order().select_orderline(line_will_select);
+                            this.numpad_state.reset();
+                            break;
+                        }
+                    }
+                }
+            }
+        },
         click_line: function (orderline, event) {
             this._super(orderline, event);
             var order = this.pos.get_order();
-            var line = order.get_selected_orderline();
-            if (line) {
-                this.remove_event_keyboard();
-                this.add_event_keyboard()
+            if (order && order.get_selected_orderline()) {
+                var line = order.get_selected_orderline();
+                this.add_event_keyboard();
                 this.inputbuffer = "";
                 this.firstinput = true;
                 var mode = this.numpad_state.get('mode');
@@ -1038,35 +1048,33 @@ odoo.define('pos_retail.screens', function (require) {
                 } else if (mode === 'price') {
                     this.inputbuffer = line['price'].toString();
                 }
-                console.log(this.inputbuffer);
             }
         },
         change_mode: function () {
-            var order = this.pos.get_order();
-            if (order.get_selected_orderline()) {
-                var line = order.get_selected_orderline();
-                var mode = this.numpad_state.get('mode');
-                this.inputbuffer = "";
-                this.firstinput = true;
-                if (mode === 'quantity') {
-                    this.inputbuffer = line['quantity'].toString();
-                } else if (mode === 'discount') {
-                    this.inputbuffer = line['discount'].toString();
-                } else if (mode === 'price') {
-                    this.inputbuffer = line['price'].toString();
-                }
-            }
+            this.inputbuffer = "";
+            this.firstinput = true;
         },
         add_event_keyboard: function () {
             this.remove_event_keyboard();
-            $('body').keypress(this.keyboard_handler);
-            $('body').keydown(this.keyboard_keydown_handler);
+            if (this.pos.server_version == 10) {
+                $('.leftpane').keypress(this.keyboard_handler);
+                $('.leftpane').keydown(this.keyboard_keydown_handler);
+            } else if (this.pos.server_version == 11) {
+                $('body').keypress(this.keyboard_handler);
+                $('body').keydown(this.keyboard_keydown_handler);
+            }
             window.document.body.addEventListener('keypress', this.keyboard_handler);
             window.document.body.addEventListener('keydown', this.keyboard_keydown_handler);
+
         },
         remove_event_keyboard: function () {
-            $('body').off('keypress', this.keyboard_handler);
-            $('body').off('keydown', this.keyboard_keydown_handler);
+            if (this.pos.server_version == 10) {
+                $('.leftpane').off('keypress', this.keyboard_handler);
+                $('.leftpane').off('keydown', this.keyboard_keydown_handler);
+            } else if (this.pos.server_version == 11) {
+                $('body').off('keypress', this.keyboard_handler);
+                $('body').off('keydown', this.keyboard_keydown_handler);
+            }
             window.document.body.removeEventListener('keypress', this.keyboard_handler);
             window.document.body.removeEventListener('keydown', this.keyboard_keydown_handler);
         },
@@ -1074,26 +1082,11 @@ odoo.define('pos_retail.screens', function (require) {
             var self = this;
             this._super(scrollbottom);
             this.add_event_keyboard();
-            var $order_screen_find_product_box = $('.order-container .searchbox >input');
-            $order_screen_find_product_box.autocomplete({
-                source: this.pos.db.products_autocomplete,
-                minLength: this.pos.config.min_length_search,
-                select: function (event, ui) {
-                    if (ui && ui['item'] && ui['item']['value'])
-                        var product = self.pos.db.get_product_by_id(ui['item']['value']);
-                    setTimeout(function () {
-                        $('.order-container .searchbox >input').value = '';
-                    }, 10);
-                    if (product) {
-                        return self.pos.get_order().add_product(product);
-                    }
-
-                }
-            });
         },
+        // -------------------------------------
+        // if config lock when print receipt
+        // we'll lock order
         change_selected_order: function () {
-            // if config lock when print receipt
-            // we'll lock order
             var res = this._super();
             var order = this.pos.get_order();
             if (order && order.lock && this.pos.config.lock_order_printed_receipt) {
@@ -1102,7 +1095,6 @@ odoo.define('pos_retail.screens', function (require) {
                 this.pos.unlock_order();
             }
         },
-
         touch_start: function (product, x, y) {
             var self = this;
             this.auto_tooltip = setTimeout(function () {
@@ -1134,7 +1126,6 @@ odoo.define('pos_retail.screens', function (require) {
             if (self.mouse_down) {
                 self.moved = true;
             }
-
         },
         rerender_orderline: function (order_line) {
             try {
@@ -1659,7 +1650,6 @@ odoo.define('pos_retail.screens', function (require) {
             setTimeout(function () {
                 $('input').click(function () {
                     self.remove_event_keyboard();
-                    console.log('input clicked');
                 });
             }, 100);
             $('.mode-button').click(function () {
@@ -2563,16 +2553,12 @@ odoo.define('pos_retail.screens', function (require) {
                 self.order_select(event, $(this), parseInt($(this).data('id')));
             });
             var search_timeout = null;
-
             if (this.pos.config.iface_vkeyboard && this.chrome.widget.keyboard) {
                 this.chrome.widget.keyboard.connect(this.$('.searchbox input'));
             }
-
             this.$('.searchbox input').on('keypress', function (event) {
                 clearTimeout(search_timeout);
-
                 var searchbox = this;
-
                 search_timeout = setTimeout(function () {
                     self.perform_search(searchbox.value, event.which === 13);
                 }, 70);
@@ -4805,6 +4791,4 @@ odoo.define('pos_retail.screens', function (require) {
     return {
         login_page: login_page
     };
-
-
 });

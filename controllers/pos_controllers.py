@@ -61,17 +61,6 @@ class pos_controller(PosController):
             bus_logs = bug_log_model.api_get_data(pos_config.bus_id.id)
         session_info['stock_datas'] = cache_model.get_on_hand_by_stock_location(
             pos_session.config_id.stock_location_id.id)
-        locations = request.env['stock.location'].search([(
-            'usage', '=', 'internal'
-        )])
-        stocks = {}
-        for location in locations:
-            datas = cache_model.get_product_available_filter_by_stock_location_ids(
-                tuple([-1, location.id]))
-            if datas:
-                stocks[location.id] = datas
-        _logger.info(stocks)
-        session_info['stocks'] = stocks
         session_info['bus_logs'] = bus_logs
         session_info['model_ids'] = {
             'product.pricelist': {},
@@ -106,6 +95,18 @@ class pos_controller(PosController):
             request.env.cr.execute("select max(id) from %s" % table)
             max_ids = request.env.cr.fetchall()
             session_info['model_ids'][object]['max_id'] = max_ids[0][0] if max_ids and max_ids[0] else 1
+            session_info['pos_cache_database'] = cache_model.load_master_data({
+                'product.product': True,
+                'pos.order.line': True,
+                'res.partner': True,
+                'account.invoice': True,
+                'product.pricelist.item': True,
+                'sale.order.line': True,
+                'product.pricelist': True,
+                'account.invoice.line': True,
+                'sale.order': True,
+                'pos.order': True
+            })
         context = {
             'session_info': json.dumps(session_info)
         }
@@ -140,8 +141,8 @@ class pos_bus(BusController):
     @http.route('/pos/sync', type="json", auth="public")
     def send(self, bus_id, messages):
         for message in messages:
-            if not message.get('value', None) or not message['value'].get('order_uid', None) or not message[
-                'value'].get('action', None):
+            if not message.get('value', None) or not message['value'].get('order_uid', None) or not \
+                    message['value'].get('action', None):
                 continue
             order_uid = message['value'].get('order_uid')
             action = message['value'].get('action')

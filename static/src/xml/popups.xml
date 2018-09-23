@@ -819,7 +819,7 @@
                     </div>
                     <div class="card-footer text-center">
                         <div class="btn btn-success pull-right print-voucher">
-                            <i class="fa fa-check"/> Print
+                            <i class="fa fa-print"/> Print
                         </div>
                         <div class="btn btn-danger pull-left cancel">
                             <i class="fa fa-close"/> Close

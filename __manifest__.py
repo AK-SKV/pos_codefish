@@ -1,6 +1,6 @@
 {
     'name': "POS Retail Management",
-    'version': '5.2.0',
+    'version': '5.2.3',
     'category': 'Point of Sale',
     'author': 'TL Technology',
     'live_test_url': 'http://posodoo.com/web/signup',
@@ -73,5 +73,5 @@
     'images': ['static/description/icon.png'],
     'support': 'thanhchatvn@gmail.com',
     "license": "OPL-1",
-    'post_init_hook':'_auto_clean_cache_when_installed',
+    'post_init_hook': '_auto_clean_cache_when_installed',
 }

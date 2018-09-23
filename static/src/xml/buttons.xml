@@ -255,7 +255,7 @@
 
     <t t-name="button_print_test">
         <div class="btn">
-            <i class='fa fa-bug' />Test Printer
+            <i class='fa fa fa-print' />Test Printer
         </div>
     </t>
 

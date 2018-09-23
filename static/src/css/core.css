@@ -1,23 +1,28 @@
-@font-face{
+@font-face {
     font-family: 'Quicksand';
     src: url(../fonts/Quicksand/Quicksand-Light.ttf);
 }
-@font-face{
+
+@font-face {
     font-family: 'Quicksand-Bold';
     src: url(../fonts/Quicksand/Quicksand-Bold.ttf);
 }
-@font-face{
+
+@font-face {
     font-family: 'Helvetical';
     src: url(../fonts/hevetical/helveticaneuelight.ttf);
 }
-@font-face{
+
+@font-face {
     font-family: 'SF';
     src: url(../fonts/SF-UI/SF-UI-Text-Light.otf);
 }
+
 .pos {
     font-family: Quicksand, sans-serif;
     color: initial
 }
+
 .card {
     font-family: Quicksand, sans-serif;
     background: none;
@@ -26,55 +31,70 @@
 .item-selected {
     border: 2px solid #6EC89B !important;
 }
+
 .pos .search_products {
     position: unset;
     width: 90%;
 }
-.pos .search_products >input{
+
+.pos .search_products > input {
     width: 350px;
 }
+
 .pos .price_list {
     color: #6EC89B;
 }
+
 .pos .modal-dialog .popup {
     height: 600px;
 }
+
 .pos .client-detail {
     padding-top: 5px;
 }
+
 .pos .clientlist-screen .client-detail > .label {
     color: black;
     text-align: left;
     font-size: 13px;
 }
+
 .pos .product-list {
     padding: 2px;
     text-align: center;
     background: white;
 }
+
 .pos .category-simple-button {
     background: white;
 }
+
 .screen .top-content {
     height: 100px;
 }
+
 .screen .right-content {
     top: 100px;
 }
+
 .screen .centered-content {
     top: 100px;
 }
+
 .pos .oe_status {
     float: left;
     font-style: normal;
     margin: 1px;
 }
+
 .pos .clientlist-screen .client-details {
     height: 360px;
 }
+
 .pos .product {
     border-bottom-width: 1px
 }
+
 .pos .product .qty_available {
     position: absolute;
     float: left;
@@ -88,6 +108,7 @@
     font-size: 12px;
     border-radius: 2px;
 }
+
 .pos .product .qty_not_available {
     position: absolute;
     float: left;
@@ -105,6 +126,7 @@
 .pos .leftpane {
     left: 300px;
 }
+
 .pos .btn {
     background-color: #e2e2e2;
     color: black;
@@ -114,6 +136,7 @@
     background-color: #e2e2e2;
     color: black;
 }
+
 .pos .buttons_pane {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -131,32 +154,38 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-
 }
+
 .pos .categories {
     border-bottom: solid 1px rgb(110, 200, 155);
     border-top: solid 1px rgb(110, 200, 155);
     font-family: Quicksand-Bold;
 }
+
 .pos .categories_pane {
     left: 200px;
     float: right;
     max-width: 200px;
     width: 200px;
 }
-.pos .category-list-scroller{
-    max-height:100%;
+
+.pos .category-list-scroller {
+    max-height: 100%;
 }
+
 .pos .breadcrumb {
     height: auto;
 }
+
 .pos .breadcrumb-button {
     color: #6EC89B;
     font-weight: bold;
 }
+
 .pos .form-control .voucher-select .detail {
     height: 150px;
 }
+
 .pos .pos-branding {
     font-style: normal;
     color: white;
@@ -178,6 +207,7 @@
     font-size: 12px;
     color: white;
 }
+
 .pos .product-list {
     text-align: left;
 }
@@ -194,7 +224,6 @@
 .item-selected {
     border: 2px solid #6EC89B !important;
 }
-
 
 .swiper-container {
     height: 300px;
@@ -231,9 +260,11 @@
 .gallery-thumbs .swiper-slide-active {
     opacity: 1;
 }
+
 .pos .invoice-action {
     cursor: pointer;
 }
+
 .login-page {
     width: 360px;
     padding: 8% 0 0;
@@ -332,7 +363,6 @@
 .container .info span .fa {
     color: #EF3B3A;
 }
-
 
 .pos .confirm-logout {
     margin-top: 10px;
@@ -613,41 +643,50 @@
     color: #6EC89B !important;
     text-align: left
 }
+
 .pos .line-variant {
     font-size: 14px;
     color: #6EC89B;
     padding-top: 5px;
     padding-left: 10px;
 }
+
 .item-selected {
     border: 2px solid #6EC89B !important;
 }
+
 .pos .clientlist-screen .button.new-product {
     left: 50%;
     margin-left: 120px;
 }
+
 .pos .label-lot {
     font-size: 14px;
     padding-left: 10px;
     float: left
 }
+
 .pos .popup input, .pos .popup-input {
     width: 90%;
 }
+
 .pos .voucher {
     width: 100%;
     height: 50%;
     text-align: center;
     font-size: 20px;
 }
+
 .pos .voucher-label {
     font-size: 14px;
     float: left;
     padding-left: 24px;
 }
+
 .pos .voucher-form-error {
     background: red;
 }
+
 .pos .voucher-select {
     width: 90%;
     padding: 5px !important;
@@ -655,44 +694,55 @@
     height: 50px;
     line-height: 50px;
 }
+
 .pos .voucher-form-required {
     color: red;
 }
+
 .pos .pads {
     height: 30%;
 }
+
 .pos .table {
     width: 100%;
 }
+
 .ui-autocomplete {
     position: absolute;
     cursor: default;
     z-index: 1001 !important;
     background-color: #F0EEEE;
 }
+
 .ui-menu-item {
     color: orangered;
     font-size: 14px;
     cursor: pointer;
 }
+
 .pos .info_tooltip {
     top: 100px;
 }
+
 .pos .popup_note {
     max-width: 350px;
 }
+
 .pos .image-row {
     max-width: 35px;
     max-height: 35px;
     border-radius: 6px;
 }
+
 .pos .timeline.timeline-simple {
     margin-top: 0px;
     padding: 0 0 0px;
 }
+
 .pos .breadcrumb:last-child {
     border-right: none;
 }
+
 .pos .product-list-re-comment .product {
     width: 80px;
     height: 80px;
@@ -703,37 +753,46 @@
     border-left: solid 3px rgb(110, 200, 155);
     border-right: solid 3px rgb(110, 200, 155);
 }
+
 .pos .client-details-contents {
     top: 50px;
 }
+
 .pos .screen {
     overflow: initial;
     background: white;
 }
+
 .pos .promotion {
     padding-left: 40px;
     font-size: 16px;
     font-weight: bold;
 }
+
 .pos .return-order {
     height: 30px;
     width: 80px;
 }
+
 .pos .made-invoice {
     height: 30px;
     width: 80px;
 }
+
 .pos .register-amount {
     height: 30px;
     width: 80px;
 }
+
 .pos .reprint-order {
     height: 30px;
     width: 80px;
 }
+
 .pos .pos_detail {
     padding-top: 30px;
 }
+
 .pos .order .loyalty {
     border-top: solid 1px rgb(110, 200, 155);
     border-bottom: solid 1px rgb(110, 200, 155);
@@ -746,21 +805,27 @@
     color: #6EC89B;
     padding-left: 40px;
 }
+
 .pos .plus_point {
     float: right;
 }
+
 .pos .redeem_point {
     float: right;
 }
+
 .pos .remaining_point {
     float: right;
 }
+
 .pos .next_point {
     float: right;
 }
+
 .pos .modal-dialog .popup {
     background-color: white;
 }
+
 .pos .shipping_information {
     width: 100%;
     text-align: left;
@@ -768,23 +833,29 @@
     border-top: solid 1px rgb(110, 200, 155);
     color: #888;
 }
+
 .pos .button_left {
     left: 200px
 }
+
 .pos .button_bottom {
     right: 400px
 }
+
 .pos .button_right {
     right: 200px
 }
+
 .pos .lines_detail {
     overflow: auto !important;
     height: 200px;
 }
+
 .pos .state {
     color: blue;
     font-weight: bold;
 }
+
 .pos .notification {
     top: 5px;
     right: 10px;
@@ -800,12 +871,14 @@
     background: #346764;
 
 }
+
 .pos .orderline_image {
     width: 30px;
     height: 30px;
     border-radius: 6px !important;
     margin-top: 10px
 }
+
 .pos .lock-dialog {
     position: absolute;
     left: 0;
@@ -815,6 +888,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
+
 .pos .lock-dialog .lock_popup {
     position: absolute;
     top: 0;
@@ -832,40 +906,49 @@
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
     z-index: 1200;
 }
+
 .pos .oe_status .oe_icon {
     width: auto;
 }
+
 .pos .product .price-tag {
     top: 0px;
     right: 0px;
 }
+
 .pos .paymentline .refresh-rounding-button {
     cursor: pointer;
     text-align: center;
 }
+
 .pos .paymentmethod {
     font-style: normal;
     font-weight: bold;
     font-size: 12px;
     text-align: center;
 }
+
 .screen .left-content.pc40 {
     right: 80%;
     border-right: none;
     border-left: none;
 }
+
 .screen .screen-content {
     border-right: none;
     border-left: none;
 }
+
 .screen .right-content.pc60 {
     left: 20%;
     border-right: none;
     border-left: none;
 }
+
 .screen .top-content {
     border-bottom: none;
 }
+
 .pos .paymentlines-container {
     border-bottom: none;
 }
@@ -875,6 +958,7 @@
     float: right;
     color: #6EC89B
 }
+
 .pos .order .summary .line .subentry > span {
     float: right;
 }
@@ -882,6 +966,7 @@
 .pos .order .summary .line {
     border-top: none;
 }
+
 .pos .product .price-tag-cost {
     position: absolute;
     font-size: 10px;
@@ -891,6 +976,7 @@
     line-height: 13px;
     padding-top: 3px;
 }
+
 .pos .product .price-tag-2 {
     position: absolute;
     font-size: 10px;
@@ -902,40 +988,51 @@
     line-height: 13px;
     border-radius: 2px;
 }
+
 .pos .loader-feedback h1 {
     font-weight: 300;
     font-size: 18px;
     color: ghostwhite;
 }
+
 .timeline.timeline-simple > li > .timeline-panel {
     max-height: 100px;
 }
+
 .pos .show_hide_pads {
     cursor: pointer;
     transform: scale(2, 1);
     color: #6EC89B;
     font-size: 40px;
 }
+
 .pos .show_hide_category_list {
     cursor: pointer;
     transform: scale(2, 1);
     color: #6EC89B;
     font-size: 40px;
 }
+
 .pos .leftpane .pads {
+    border-left: solid 3px rgb(110, 200, 155);
     border-top: none;
     background-color: white;
 }
+
 .pos .actionpad {
-    width: 216px;
+    width: 180px;
     margin: 0px;
+    float: right;
     border-top: none;
     border-left: none;
+    padding-right: 3px;
 }
-.pos .numpad button {
+
+.pos .pads .numpad button {
     display: inline-block;
-    margin-bottom: 0;
-    font-weight: normal;
+    float: none;
+    margin: 1px;
+    font-weight: bold;
     text-align: center;
     vertical-align: middle;
     touch-action: manipulation;
@@ -943,23 +1040,26 @@
     background-image: none;
     border: 1px solid transparent;
     white-space: nowrap;
-    padding: 6px 12px;
-    line-height: 1.42857143;
-    border-radius: 0;
+    border-radius: 3px !important;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
-.pos .numpad button:hover {
+
+.pos .pads .numpad button:hover {
     background-color: #6EC89B;
 }
-.pos .numpad {
-    width: 216px;
+
+.pos .pads .numpad {
+    width: 240px;
     margin: 0px;
     border-top: none;
+    float: right;
 }
+
 .pos .actionpad .button.set-customer {
+    font-family: inherit;
     display: inline-block;
     margin-bottom: 0;
     font-weight: normal;
@@ -980,53 +1080,63 @@
     border-radius: 4px;
     border: none;
     margin-bottom: 5px;
+    float: none;
 }
+
 .pos .actionpad .button.set-customer:hover {
     background-color: #6EC89B;
 }
+
 .pos .actionpad .button.pay {
+    background: #6EC89B;
+    font-family: inherit;
+    font-size: 20px;
+    color: ghostwhite;
     display: inline-block;
-    margin-bottom: 0;
     border-radius: 4px;
     float: none;
     border: none;
-    margin-bottom: 5px;
-    height: 157px;
+    height: 166px;
 }
+
 .pos .actionpad .button.pay:hover {
     background-color: #6EC89B;
 }
-.pos .order .orderline {
-    border-top: solid 1px rgb(110, 200, 155);
-    height: auto;
-    background: beige;
-}
+
 .pos .order .orderline:hover {
     background-color: darkgray;
 }
+
 .pos .block_add_product {
     pointer-events: none;
     opacity: 0.4;
 }
+
 .pos .product-list-container .list {
     font-size: 13px;
     width: 100%;
     line-height: 40px;
 }
+
 .pos .product-list-container .list th,
 .pos .product-list-container .list td {
     padding: 0px 8px;
 }
+
 .pos .product-list-container .list tr {
     transition: all 150ms linear;
     color: black;
     background: whitesmoke;
-    border-top: solid 1px rgb(110, 200, 155)
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 32px;
 }
+
 .pos .product-list-container .list thead > tr,
 .pos .product-list-container .list tbody > tr:nth-child(even) {
     background: rgb(247, 247, 247);
 }
+
 .pos .product_special {
     background: red;
     position: absolute;
@@ -1039,15 +1149,18 @@
     opacity: 0.6;
     width: 100%;
 }
+
 .pos .select_box {
     padding-top: 10px;
 }
+
 .pos .quickly_buttons {
     background-color: white;
     height: 50px;
     padding-left: 5px;
     padding-top: 2px;
 }
+
 .pos .quickly_icon {
     cursor: pointer;
     border-radius: 4px;
@@ -1055,27 +1168,33 @@
     text-align: center;
     font-size: 20px;
 }
+
 .pos .quickly_icon:hover {
     background: #12ae8e;
     color: white;
 }
+
 .pos .product-list {
     cursor: pointer;
     font-weight: bold;
 }
+
 .pos .rightpane {
     left: 740px;
-    border-right: none;
 }
+
 .pos .collapse .in {
     background-color: white;
 }
+
 .pos .pull-left {
     left: 20px
 }
+
 .pos .pull-right {
     right: 20px
 }
+
 .pos .input_form {
     width: 100%;
     background: gray;
@@ -1085,6 +1204,7 @@
     font-weight: bold;
     height: 50px;
 }
+
 .pos .left_button {
     max-width: 80px;
     max-height: 80px;
@@ -1095,21 +1215,23 @@
     margin: 2px !important;
     border: 1px solid lightsteelblue;
     border-bottom-width: 1px;
-    color: white;
 }
+
 .pos .left_button .product-name {
     background: bottom;
 }
+
 .pos .left_button:hover {
     background-color: #999999;
     color: white;
     cursor: pointer;
 }
+
 .pos .button_icon {
     padding-top: 1px;
-    font-size: 18px;
+    font-size: 25px;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .pos .button_text {
@@ -1118,25 +1240,30 @@
     bottom: auto;
     padding-top: 5px;
 }
+
 .pos .highlight {
     color: white;
     background: #6EC89B;
 
 }
+
 .pos .payment-numpad {
     width: auto;
 }
+
 .pos .payment-buttons {
     padding: 5px;
     float: left;
     width: 50%;
     padding-top: 15px;
 }
+
 .pos .note_order {
     font-size: 40px;
     cursor: pointer;
     line-height: initial;
 }
+
 .pos .note_order:hover {
     color: #6EC89B;
 }
@@ -1146,9 +1273,11 @@
     cursor: pointer;
     line-height: initial;
 }
+
 .pos .signature_order:hover {
     color: #6EC89B;
 }
+
 .pos .product-list .product {
     margin: 10px !important;
     border-bottom-width: 1px;
@@ -1156,9 +1285,11 @@
     font-family: Helvetical;
 
 }
+
 .pos .order .orderline .info-list em {
     padding-left: 20px;
 }
+
 .pos .popup.popup-selection .selection-item {
     width: auto;
     font-size: 20px;
@@ -1168,9 +1299,11 @@
     padding: 0px 16px;
     border-bottom: solid 3px rgb(110, 200, 155);
 }
+
 .pos .pos-sale-ticket {
     font-family: Quicksand, sans-serif;
 }
+
 .pos .hot_key {
     position: absolute;
     right: 0px;
@@ -1183,9 +1316,11 @@
     font-size: 12px;
     border-radius: 10px;
 }
+
 .pos .order .orderline.dirty {
     color: blue;
 }
+
 .pos .button_key {
     font-family: QuickSand;
     text-align: center;
@@ -1200,65 +1335,108 @@
     border-radius: 30px;
     background: royalblue;
 }
+
 .pos .order .orderline.selected {
-    background: #0b2e59;
+    background: #875A7B;
     color: white;
     font-size: 20px;
-    height: auto;
 }
+
 .pos .order .orderline.selected .info-list {
     color: white;
 }
+
 .pos .order .orderline.selected .info-list .info {
     color: white;
-    font-size: initial;
 }
+
 .pos .order .orderline.selected .info-list em {
     color: white;
 }
+
 .pos .order .orderline.selected .info-list .bus-info {
     color: white;
 }
+
 .pos .pos-topheader {
     background: #12ae8e;
 }
+
 .pos .pos-rightheader {
     left: 670px;
 }
+
 .pos .pos-rightheader > * {
     border-right: 0px solid #292929;
 }
+
 .pos .pos-rightheader .header-button {
     color: black;
     border-left: none;
     border-right: none;
 }
+
 .pos .pos-rightheader .header-button:last-child {
     border-left: none;
     font-size: 14px;
     font-weight: bold;
 }
+
 .pos .searchbox input {
     border-radius: 10px;
 }
+
 .pos .order .orderline .info-list em {
     color: black;
     font-weight: bold;
 }
+
 .pos .order .orderline .info-list {
     color: black;
     font-weight: bold;
     font-size: 11px;
 }
+
 .pos .order .summary .line .subentry > span {
     font-size: 25px;
     color: gray;
+    margin-bottom: 80px;
 }
+
 .pos .total .label {
     font-size: 18px;
 }
+
 .pos section button {
     font-size: 16px;
+}
+
+.pos .order_widget_search_products {
+    width: 150px;
+    float: left;
+    font-size: 14px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 3px;
+    border-bottom: none;
+    border: 1px solid #6EC89B;
+}
+
+.pos .order_widget_search_partners {
+    width: 150px;
+    float: right;
+    font-size: 14px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 3px;
+    border-bottom: none;
+    border: 1px solid #6EC89B;
+}
+.pos .mode-button.selected-mode {
+    background: red;
+    font-weight: bold;
 }
 
 .pos .oe_statu .oe_green, .pos .oe_icon.oe_green{

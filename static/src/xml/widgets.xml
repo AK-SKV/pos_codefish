@@ -128,49 +128,6 @@
         <t t-jquery="span[class*='product']" t-operation="replace">
             <t t-if="widget.pos.config.product_view == 'list'">
                 <tr class='product-list' t-att-data-product-id="product.id">
-                    <td>
-                        <img class='orderline_image' t-att-src='image_url'/>
-                    </td>
-                    <td>
-                        <t t-esc="product.display_name"/>
-                    </td>
-                    <td>
-                        <t t-if="product.default_code">
-                            <t t-esc="product.default_code"/>
-                        </t>
-                        <t t-if="!product.default_code">
-                            N/A
-                        </t>
-                    </td>
-                    <td>
-                        <span t-if="!product.to_weight">
-                           <t t-esc="widget.pos.units_by_id[product.uom_id[0]].name"/>
-                        </span>
-                    </td>
-                    <td class="text-right">
-                        <span class="price-tag text-right">
-                            <t t-esc="widget.format_currency(product.list_price,'Product Price')"/>
-                        </span>
-                    </td>
-                 <!--   <td class="text-right">
-                        <span class="price-tag text-right">
-                            <t t-esc="widget.format_currency(product.standard_price, 'Product Price') + '/' + widget.pos.units_by_id[product.uom_id[0]].name"/>
-                        </span>
-                    </td>-->
-                 <!--   <t t-if="widget.pos.server_version == 10">
-                        <td class="text-right">
-                            <span class="price-tag text-right">
-                                <t t-esc="widget.format_currency(widget.pos.get_price_with_tax(product, 1),'Product Price') + '/' + widget.pos.units_by_id[product.uom_id[0]].name"/>
-                            </span>
-                        </td>
-                    </t> -->
-                    <t t-if="widget.pos.server_version == 11">
-                        <td class="text-right">
-                            <span class="price-tag text-right">
-                                <t t-esc="widget.format_currency(product.get_price_with_tax(product, 1),'Product Price') + '/' + widget.pos.units_by_id[product.uom_id[0]].name"/>
-                            </span>
-                        </td>
-                    </t>
                     <td class="text-center">
                         <t t-if="widget.pos.server_version == 10">
                             <t t-if="widget.pos.config.display_onhand">
@@ -232,6 +189,48 @@
                                 </t>
                             </t>
                         </t>
+                    </td>
+                    <td>
+                        <t t-if="widget.pos.server_version == 11">
+                            <t t-if="product.stocks">
+                                <t t-foreach="product.stocks" t-as="location_id">
+                                    <t t-set="location" t-value="widget.pos.stock_location_by_id[location_id]"/>
+                                    <t t-if="location">
+                                        <li><t t-esc="location.name"/> : <t t-esc="product.stocks[location_id]"/></li>
+                                    </t>
+                                </t>
+                            </t>
+                        </t>
+                    </td>
+                    <td>
+                        <t t-esc="product.display_name"/>
+                    </td>
+                    <td class="text-right">
+                        <span class="price-tag text-right">
+                            <t t-esc="widget.format_currency(product.list_price, 'Product Price')  + '/' + widget.pos.units_by_id[product.uom_id[0]].name"/>
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <span class="price-tag text-right">
+                            <t t-esc="widget.format_currency(product.standard_price, 'Product Price')"/>
+                        </span>
+                    </td>
+                    <t t-if="widget.pos.server_version == 10">
+                        <td class="text-right">
+                            <span class="price-tag text-right">
+                                <t t-esc="widget.format_currency(widget.pos.get_price_with_tax(product, 1),'Product Price')"/>
+                            </span>
+                        </td>
+                    </t>
+                    <t t-if="widget.pos.server_version == 11">
+                        <td class="text-right">
+                            <span class="price-tag text-right">
+                                <t t-esc="widget.format_currency(product.get_price_with_tax(product, 1),'Product Price')"/>
+                            </span>
+                        </td>
+                    </t>
+                     <td>
+                        <img class='orderline_image' t-att-src='image_url'/>
                     </td>
                 </tr>
             </t>
@@ -434,12 +433,12 @@
 
                             </span>
                         </t>
-                        <t t-if="widget.pos.config.allow_customer">
-                            <div class="searchbox find_customer">
-                                <input placeholder="Search Partners" class="ui-autocomplete-input" autocomplete="off"/>
-                                <span class="search-clear"></span>
-                            </div>
-                        </t>
+                        <!--<t t-if="widget.pos.config.allow_customer">-->
+                            <!--<div class="searchbox find_customer">-->
+                                <!--<input placeholder="Search Partners" class="ui-autocomplete-input" autocomplete="off"/>-->
+                                <!--<span class="search-clear"></span>-->
+                            <!--</div>-->
+                        <!--</t>-->
                         <span class="breadcrumb quickly_icon clear_blank_order">
                             <i class='fa fa-trash' />
                         </span>
@@ -466,7 +465,7 @@
         </t>
         <!-- show / hide pads -->
         <t t-jquery="div[class*='control-buttons']" t-operation="before">
-            <div>
+            <div style="height: 30px; padding-bottom: 5px">
                 <i class="show_hide_pads fa fa-caret-down fa-2x"/>
             </div>
         </t>
@@ -531,14 +530,13 @@
                                 <table class="product-list list">
                                     <thead>
                                         <tr>
-                                            <th>Image</th>
+                                            <th class="text-center"><t t-esc="widget.pos.config.stock_location_id[1]" /></th>
+                                            <th class="text-center">All stock</th>
                                             <th>Name</th>
-                                            <th>Code</th>
-                                            <th>UoM</th>
-                                            <th>Sale</th>
-                                        <!-- <th>Cost</th>
-                                           <th>Within tax</th>-->
-                                            <th class="text-center">Available</th>
+                                            <th>Public price</th>
+                                            <th>Cost</th>
+                                            <th>Within tax</th>
+                                            <th>Image</th>
                                         </tr>
                                     </thead>
                                     <tbody class='product-list-contents'>
@@ -553,14 +551,13 @@
                                 <table class="product-list list" style="display:none">
                                     <thead>
                                         <tr>
-                                           <th class="text-center">Available</th>
-                                            <th>Image</th>
-                                            <th>Code</th>
+                                            <th class="text-center">POS stock</th>
+                                            <th class="text-center">All stock</th>
                                             <th>Name</th>
-                                            <th>UoM</th>
-                                            <th>Sale</th>
+                                            <th>Public price</th>
                                             <th>Cost</th>
                                             <th>Within tax</th>
+                                            <th>Image</th>
                                         </tr>
                                     </thead>
                                     <tbody class='product-list-contents'>

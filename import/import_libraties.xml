@@ -41,6 +41,7 @@
             <script type="text/javascript" src="/pos_retail/static/src/js/widgets.js"/>
             <script type="text/javascript" src="/pos_retail/static/src/js/rounding.js"/>
             <script type="text/javascript" src="/pos_retail/static/src/js/packlot.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/js/gui.js"/>
             <link rel="stylesheet" href="/pos_retail/static/src/css/core.css"/>
             <link t-if="lang_direction == 'rtl'" rel="stylesheet" href="/pos_retail/static/src/css/rtl.css"/>
             <link rel="stylesheet" href="/pos_retail/static/src/css/synchronization.css"/>

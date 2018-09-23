@@ -141,7 +141,15 @@ class pos_promotion_multi_buy(models.Model):
 
     product_id = fields.Many2one('product.product', domain=[('available_in_pos', '=', True)], string='Product',
                                  required=1)
-    quantity_of_by = fields.Float('Quantity Buy', required=1)
-    quantity_promotion = fields.Float('Quantity apply', required=1)
+    quantity_of_by = fields.Float('Qty total', required=1)
+    quantity_promotion = fields.Float('Qty apply', required=1)
     price_promotion = fields.Float('Price apply', required=1)
     promotion_id = fields.Many2one('pos.promotion', 'Promotion', required=1)
+    sub_price = fields.Float(compute='_get_sub_price', string='Sub price', help='Total price of line')
+
+    @api.multi
+    def _get_sub_price(self):
+        for record in self:
+            record.sub_price = record.quantity_promotion * record.price_promotion
+            if record.quantity_promotion < record.quantity_of_by:
+                record.sub_price += (record.quantity_of_by - record.quantity_promotion) * record.product_id.list_price

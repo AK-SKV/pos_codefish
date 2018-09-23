@@ -7,8 +7,12 @@
             <div class="swiper-wrapper">
                 <t t-foreach="images" t-as="image">
                     <div class="swiper-slide" t-att-style="image.image_url">
-                        <li><t t-esc="image.name"/></li>
-                        <li><t t-esc="image.description"/></li>
+                        <t t-if="image.name">
+                            <li><t t-esc="image.name"/></li>
+                        </t>
+                        <t t-if="image.description">
+                            <li><t t-esc="image.description"/></li>
+                        </t>
                     </div>
                 </t>
             </div>

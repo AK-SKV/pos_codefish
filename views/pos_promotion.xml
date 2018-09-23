@@ -122,6 +122,7 @@
                                     <field name="quantity_of_by"/>
                                     <field name="quantity_promotion"/>
                                     <field name="price_promotion"/>
+                                    <field name="sub_price"/>
                                 </tree>
                             </field>
                         </group>

@@ -200,25 +200,25 @@
         <record id="pos_config_image_01" model="pos.config.image">
             <field name="name">Image 1</field>
             <field name="image" type="base64" file="pos_retail/demo/1.jpg"/>
-            <field name="config_id" ref="pos_config_03"/>
+            <field name="config_id" ref="pos_config_05"/>
         </record>
 
         <record id="pos_config_image_02" model="pos.config.image">
             <field name="name">Image 2</field>
             <field name="image" type="base64" file="pos_retail/demo/3.jpg"/>
-            <field name="config_id" ref="pos_config_03"/>
+            <field name="config_id" ref="pos_config_05"/>
         </record>
 
         <record id="pos_config_image_03" model="pos.config.image">
             <field name="name">Image 3</field>
             <field name="image" type="base64" file="pos_retail/demo/3.jpg"/>
-            <field name="config_id" ref="pos_config_03"/>
+            <field name="config_id" ref="pos_config_05"/>
         </record>
 
         <record id="pos_config_image_04" model="pos.config.image">
             <field name="name">Image 4</field>
             <field name="image" type="base64" file="pos_retail/demo/4.jpg"/>
-            <field name="config_id" ref="pos_config_03"/>
+            <field name="config_id" ref="pos_config_05"/>
         </record>
 
         <record id="pos_tag1" model="pos.tag">

@@ -167,7 +167,7 @@
                             </line>
                             <t t-if="widget.pos.config.display_tax_receipt and line.tax_amount !== 0">
                                 <line font='b' line-ratio='0.4' indent='1'>
-                                    <left> Tax: <t t-esc='line.tax_amount' /></left>
+                                    <left> Tax: <t t-esc='line.tax_amount.toFixed(2)' /></left>
                                 </line>
                             </t>
                             <t t-if='line.discount !== 0'>
@@ -234,7 +234,7 @@
                         </line>
                         <t t-if="widget.pos.config.display_tax_receipt and line.tax_amount !== 0">
                             <line font='b' line-ratio='0.4' indent='1'>
-                                <left> Tax: <t t-esc='line.tax_amount' /></left>
+                                <left> Tax: <t t-esc='line.tax_amount.toFixed(2)' /></left>
                             </line>
                         </t>
                         <t t-if='line.discount !== 0'>

@@ -676,7 +676,7 @@ odoo.define('pos_retail.model', function (require) {
             $('.find_customer').removeClass('oe_hidden');
             $('.numpad').removeClass('oe_hidden');
             $('.actionpad').removeClass('oe_hidden');
-            $('.leftpane').css({'left': '220px'});
+            $('.leftpane').css({'left': '300px'});
             if (this.config.staff_level == 'manager') {
                 $('.deleteorder-button').removeClass('oe_hidden');
             }

@@ -821,9 +821,6 @@ body .o_form_view .o_group.o_inner_group.oe_subtotal_footer{
     direction: rtl;
 }
 
-.pos .order .orderline .info-list em{
-    padding-left: 0px;
-}
 
 .pos .actionpad .button.set-customer{
     font-family: 'Cairo', serif;
@@ -891,22 +888,12 @@ background-color: #0b2e59
     direction: rtl;
 }
 
-.pos .order .orderline .price{
-    direction: rtl;
-}
 
-.pos .order .summary .line .subentry > span{
-    float: left;
-}
 
-.pos .order .orderline .info-list{
-    float: right;
-    direction: rtl;
-}
 
-.pos .order .summary .total{
-        direction: rtl;
-}
+
+
+
 
 .pos .actionpad .button.pay .pay-circle .fa{
         right: 3px;

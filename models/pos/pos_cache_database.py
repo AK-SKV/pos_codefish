@@ -46,7 +46,6 @@ class pos_cache_database(models.Model):
             datas.append(val)
         return datas
 
-
     @api.multi
     def get_fields_by_model(self, model_name):
         params = self.env['ir.config_parameter'].sudo().get_param(model_name)
@@ -174,9 +173,6 @@ class pos_cache_database(models.Model):
         from uitstock u 
           full outer join instock i on u.product = i.product
         """
-        self.env.cr.execute(sql)
-        results = self.env.cr.fetchall()
-        return results
 
     @api.model
     def get_on_hand_by_stock_location(self, stock_location_id):

@@ -142,7 +142,8 @@ class pos_cache_database(models.Model):
         return stock_location_ids
 
     @api.model
-    def get_product_available_all_stock_location(self):
+    def get_product_available_all_stock_location(self, stock_location_id):
+        _logger.info('{get_product_available_all_stock_location}')
         sql = """
         with
           uitstock as (
@@ -183,12 +184,54 @@ class pos_cache_database(models.Model):
         if len(stock_ids) > 1:
             stock_datas = self.get_product_available_filter_by_stock_location_ids(tuple(stock_ids))
         else:
-            stock_datas = self.get_product_available_filter_by_stock_location_ids(
-                tuple(stock_location_id))
+            stock_datas = self.get_product_available_filter_by_stock_location_id(
+                stock_location_id)
         if stock_datas == {}:
             return False
         else:
             return stock_datas
+
+    @api.model
+    def get_product_available_filter_by_stock_location_id(self, stock_location_id):
+        _logger.info('{get_product_available_filter_by_stock_location_id}')
+        sql = """
+        with
+            uitstock as (
+                select
+                  t.name product, sum(product_qty) sumout, m.product_id, m.product_uom 
+                from stock_move m 
+                left join product_product p on m.product_id = p.id 
+                left join product_template t on p.product_tmpl_id = t.id
+                where
+                    m.state like 'done'
+                    and t.type = 'product' 
+                    and m.location_id in (select id from stock_location where id=%s) 
+                    and m.location_dest_id not in (select id from stock_location where id=%s) 
+                group by product_id,product_uom, t.name order by t.name asc
+            ),
+            instock as (
+                select
+                    t.list_price purchaseprice, t.name product, sum(product_qty) sumin, m.product_id, m.product_uom
+                from stock_move m
+                left join product_product p on m.product_id = p.id
+                left join product_template t on p.product_tmpl_id = t.id
+                where 
+                    m.state like 'done' and m.location_id not in (select id from stock_location where id=%s)
+                    and m.location_dest_id in (select id from stock_location where id=%s)
+                group by product_id,product_uom, t.name, t.list_price order by t.name asc
+          ) 
+        select
+          i.product_id, i.product, sumin-coalesce(sumout,0) AS stock, sumin, sumout, purchaseprice, ((sumin-coalesce(sumout,0)) * purchaseprice) as stockvalue
+        from uitstock u 
+          full outer join instock i on u.product = i.product
+        """ % (stock_location_id, stock_location_id, stock_location_id, stock_location_id)
+        self.env.cr.execute(sql)
+        results = self.env.cr.fetchall()
+        pos_data = {}
+        for result in results:
+            if result[0]:
+                pos_data[result[0]] = result[2]
+        return pos_data
 
     @api.model
     def get_product_available_filter_by_stock_location_ids(self, stock_location_ids):

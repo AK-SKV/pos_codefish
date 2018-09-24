@@ -1055,17 +1055,18 @@ odoo.define('pos_retail.screens', function (require) {
             this.firstinput = true;
         },
         add_event_keyboard: function () {
-            this.remove_event_keyboard();
-            if (this.pos.server_version == 10) {
-                $('.leftpane').keypress(this.keyboard_handler);
-                $('.leftpane').keydown(this.keyboard_keydown_handler);
-            } else if (this.pos.server_version == 11) {
-                $('body').keypress(this.keyboard_handler);
-                $('body').keydown(this.keyboard_keydown_handler);
+            if (this.pos.config.keyboard_event) {
+                this.remove_event_keyboard();
+                if (this.pos.server_version == 10) {
+                    $('.leftpane').keypress(this.keyboard_handler);
+                    $('.leftpane').keydown(this.keyboard_keydown_handler);
+                } else if (this.pos.server_version == 11) {
+                    $('body').keypress(this.keyboard_handler);
+                    $('body').keydown(this.keyboard_keydown_handler);
+                }
+                window.document.body.addEventListener('keypress', this.keyboard_handler);
+                window.document.body.addEventListener('keydown', this.keyboard_keydown_handler);
             }
-            window.document.body.addEventListener('keypress', this.keyboard_handler);
-            window.document.body.addEventListener('keydown', this.keyboard_keydown_handler);
-
         },
         remove_event_keyboard: function () {
             if (this.pos.server_version == 10) {
@@ -1699,6 +1700,9 @@ odoo.define('pos_retail.screens', function (require) {
                 if ($note) {
                     $note.textContent = selected_order.get_note();
                 }
+            }
+            if (this.pos.config.single_screen) { // left pane order widget
+                this.pos.$order_html = $('.order-container').html();
             }
         }
     });
@@ -3655,65 +3659,66 @@ odoo.define('pos_retail.screens', function (require) {
         init: function (parent, options) {
             this._super(parent, options);
             var self = this;
-            // add Keycode 27, back screen
-            this.keyboard_keydown_handler = function (event) {
-                if (event.keyCode === 8 || event.keyCode === 46 || event.keyCode === 27) { // Backspace and Delete
+            if (this.pos.config.keyboard_event) { // add Keycode 27, back screen
+                this.keyboard_keydown_handler = function (event) {
+                    if (event.keyCode === 8 || event.keyCode === 46 || event.keyCode === 27) { // Backspace and Delete
+                        event.preventDefault();
+                        self.keyboard_handler(event);
+                    }
+                };
+                this.keyboard_handler = function (event) {
+                    var key = '';
+                    if (event.type === "keypress") {
+                        if (event.keyCode === 13) { // Enter
+                            self.validate_order();
+                        } else if (event.keyCode === 190 || // Dot
+                            event.keyCode === 188 ||  // Comma
+                            event.keyCode === 46) {  // Numpad dot
+                            key = self.decimal_point;
+                        } else if (event.keyCode >= 48 && event.keyCode <= 57) { // Numbers
+                            key = '' + (event.keyCode - 48);
+                        } else if (event.keyCode === 45) { // Minus
+                            key = '-';
+                        } else if (event.keyCode === 43) { // Plus
+                            key = '+';
+                        } else if (event.keyCode == 102) { // f: invoice
+                            $('.paid_full').click();
+                        } else if (event.keyCode == 112) {  // p: invoice
+                            $('.paid_partial').click();
+                        } else if (event.keyCode == 99) { // c: customer
+                            $('.js_set_customer').click();
+                        } else if (event.keyCode == 105) { // i: invoice
+                            $('.js_invoice').click();
+                        } else if (event.keyCode == 118) { // v: voucher
+                            $('.input_voucher').click();
+                        } else if (event.keyCode == 115) { // s: signature order
+                            $('.signature_order').click();
+                        } else if (event.keyCode == 110) { // n: note
+                            $('.add_note').click();
+                        } else if (event.keyCode == 97) { // n: note
+                            $('.js_auto_register_payment').click();
+                        } else if (event.keyCode == 109) { // n: note
+                            $('.send_invoice_email').click();
+                        } else if (event.keyCode == 119) { // n: note
+                            $('.add_wallet').click();
+                        } else if (event.keyCode == 100) { // n: note
+                            $('.add_credit').click();
+                        }
+                    } else { // keyup/keydown
+                        if (event.keyCode === 46) { // Delete
+                            key = 'CLEAR';
+                        } else if (event.keyCode === 8) { // Backspace
+                            key = 'BACKSPACE';
+                        }
+                        else if (event.keyCode === 27) { // Backspace
+                            self.gui.back();
+                            self.pos.trigger('back:order');
+                        }
+                    }
+                    self.payment_input(key);
                     event.preventDefault();
-                    self.keyboard_handler(event);
-                }
-            };
-            this.keyboard_handler = function (event) {
-                var key = '';
-                if (event.type === "keypress") {
-                    if (event.keyCode === 13) { // Enter
-                        self.validate_order();
-                    } else if (event.keyCode === 190 || // Dot
-                        event.keyCode === 188 ||  // Comma
-                        event.keyCode === 46) {  // Numpad dot
-                        key = self.decimal_point;
-                    } else if (event.keyCode >= 48 && event.keyCode <= 57) { // Numbers
-                        key = '' + (event.keyCode - 48);
-                    } else if (event.keyCode === 45) { // Minus
-                        key = '-';
-                    } else if (event.keyCode === 43) { // Plus
-                        key = '+';
-                    } else if (event.keyCode == 102) { // f: invoice
-                        $('.paid_full').click();
-                    } else if (event.keyCode == 112) {  // p: invoice
-                        $('.paid_partial').click();
-                    } else if (event.keyCode == 99) { // c: customer
-                        $('.js_set_customer').click();
-                    } else if (event.keyCode == 105) { // i: invoice
-                        $('.js_invoice').click();
-                    } else if (event.keyCode == 118) { // v: voucher
-                        $('.input_voucher').click();
-                    } else if (event.keyCode == 115) { // s: signature order
-                        $('.signature_order').click();
-                    } else if (event.keyCode == 110) { // n: note
-                        $('.add_note').click();
-                    } else if (event.keyCode == 97) { // n: note
-                        $('.js_auto_register_payment').click();
-                    } else if (event.keyCode == 109) { // n: note
-                        $('.send_invoice_email').click();
-                    } else if (event.keyCode == 119) { // n: note
-                        $('.add_wallet').click();
-                    } else if (event.keyCode == 100) { // n: note
-                        $('.add_credit').click();
-                    }
-                } else { // keyup/keydown
-                    if (event.keyCode === 46) { // Delete
-                        key = 'CLEAR';
-                    } else if (event.keyCode === 8) { // Backspace
-                        key = 'BACKSPACE';
-                    }
-                    else if (event.keyCode === 27) { // Backspace
-                        self.gui.back();
-                        self.pos.trigger('back:order');
-                    }
-                }
-                self.payment_input(key);
-                event.preventDefault();
-            };
+                };
+            }
         },
         payment_input: function (input) {
             this._super(input);

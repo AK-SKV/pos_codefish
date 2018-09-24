@@ -1341,10 +1341,7 @@ odoo.define('pos_retail.popups', function (require) {
                             });
                         }
                     }
-                    return self.pos.gui.show_popup('confirm', {
-                        title: 'Done',
-                        body: 'Cross items added.'
-                    });
+                    return true;
                 }
             });
         }

@@ -102,6 +102,8 @@
                                         <field name="display_cost_price"/>
                                         <field name="cash_out"/>
                                         <field name="cash_in"/>
+                                        <field name="single_screen"/>
+                                        <field name="keyboard_event"/>
                                         <field name="min_length_search"/>
                                     </group>
                                     <group>

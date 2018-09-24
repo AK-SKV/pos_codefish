@@ -227,6 +227,8 @@ class pos_config(models.Model):
     cash_out = fields.Boolean('Cash out', default=1)
     cash_in = fields.Boolean('Cash in', default=1)
     min_length_search = fields.Integer('Min character length search', default=3)
+    single_screen = fields.Boolean('Single screen', help='Made order left page display on payment, customers', default=1)
+    keyboard_event = fields.Boolean('Keyboard event', default=0)
 
     @api.multi
     def remove_database(self):

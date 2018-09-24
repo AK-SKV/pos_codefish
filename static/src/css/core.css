@@ -1338,8 +1338,13 @@
 
 .pos .order .orderline.selected {
     background: #875A7B;
-    color: white;
+    color: black;
     font-size: 20px;
+    font-weight: bold;
+}
+.pos .order .orderline.selected .info-list .info {
+    font-size: 15px;
+    color: black;
 }
 
 .pos .order .orderline.selected .info-list {
@@ -1438,7 +1443,9 @@
     background: red;
     font-weight: bold;
 }
-
+.pos_disable_click{
+    pointer-events: none;
+}
 .pos .oe_statu .oe_green, .pos .oe_icon.oe_green{
     color: white;
 }

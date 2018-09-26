@@ -6,6 +6,7 @@ import ast
 
 _logger = logging.getLogger(__name__)
 
+
 class pos_cache_database(models.Model):
     _name = "pos.cache.database"
 

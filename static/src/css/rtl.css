@@ -927,3 +927,19 @@ background-color: #0b2e59
 .pos .paymentline.selected{
     direction: rtl;
 }
+
+.pos .order .orderline.selected .info-list .info{
+    direction: rtl;
+}
+
+.pos .order .orderline.selected .info-list .bus-info{
+    direction: rtl;
+}
+
+.pos .order .summary .line .subentry > span{
+        float: unset;
+}
+
+.pos .bus-info{
+    direction: rtl;
+    }

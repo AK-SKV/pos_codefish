@@ -210,7 +210,7 @@
                             <t t-esc="widget.format_currency(product.list_price, 'Product Price')  + '/' + widget.pos.units_by_id[product.uom_id[0]].name"/>
                         </span>
                     </td>
-                    <td class="text-right">
+                    <!--<td class="text-right">
                         <span class="price-tag text-right">
                             <t t-esc="widget.format_currency(product.standard_price, 'Product Price')"/>
                         </span>
@@ -228,7 +228,7 @@
                                 <t t-esc="widget.format_currency(product.get_price_with_tax(product, 1),'Product Price')"/>
                             </span>
                         </td>
-                    </t>
+                    </t>-->
                      <td>
                         <img class='orderline_image' t-att-src='image_url'/>
                     </td>
@@ -534,8 +534,8 @@
                                             <th class="text-center">All stock</th>
                                             <th>Name</th>
                                             <th>Public price</th>
-                                            <th>Cost</th>
-                                            <th>Within tax</th>
+                                            <!--<th>Cost</th>
+                                            <th>Within tax</th>-->
                                             <th>Image</th>
                                         </tr>
                                     </thead>

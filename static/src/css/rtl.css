@@ -943,3 +943,7 @@ background-color: #0b2e59
 .pos .bus-info{
     direction: rtl;
     }
+
+loyalty_plus_point{
+    float: right;
+}

@@ -6,7 +6,6 @@ import ast
 
 _logger = logging.getLogger(__name__)
 
-
 class pos_cache_database(models.Model):
     _name = "pos.cache.database"
 
@@ -46,6 +45,7 @@ class pos_cache_database(models.Model):
             val['model'] = cache['res_model']
             datas.append(val)
         return datas
+
 
     @api.multi
     def get_fields_by_model(self, model_name):

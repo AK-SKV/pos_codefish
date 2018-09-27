@@ -3,24 +3,22 @@
 
     <t t-extend="PosTicket">
         <t t-jquery="div[class*='pos-sale-ticket']" t-operation="replace">
-              <div class="pos-sale-ticket">
-            <t t-if="order.formatted_validation_date">
+            <div class="pos-sale-ticket">
+                <t t-if="order.formatted_validation_date">
                 <div class="pos-center-align"><t t-esc="order.formatted_validation_date"/> | <t t-esc="order.name"/></div>
             </t>
-            <div style="width: 45%;/* float: left; */margin-left: auto;margin-right: auto;">
+                <div style="width: 45%;/* float: left; */margin-left: auto;margin-right: auto;">
                         <img src='/web/binary/company_logo' style="width:100%"/>
                     </div>
-            <t t-if="order.date">
-                <div class="pos-center-align"><t t-esc="order.date"/> | <t t-esc="order.name"/></div>
-            </t>
-                <t t-set="client" t-value="order.get_client()">
-
-                   Name: <t class="custom-ticket-client-name" t-esc="client['name']"/><br />
+                <!--<t t-if="order.date">
+                    <div class="pos-center-align"><t t-esc="order.date"/> | <t t-esc="order.name"/></div>
                 </t>
-
-            <t t-if="widget.pos.config.category_wise_receipt">
-                <t t-set='index' t-value="1"/>
-                <tr t-foreach="receipt['orderlines_by_category_name']" t-as="category">
+                <t t-set="client" t-value="order.get_client()">
+                    Name: <t class="custom-ticket-client-name" t-esc="client['name']"/><br/>
+                </t>-->
+                <t t-if="widget.pos.config.category_wise_receipt">
+                    <t t-set='index' t-value="1"/>
+                    <tr t-foreach="receipt['orderlines_by_category_name']" t-as="category">
                     <t t-set='orderlines' t-value="receipt['orderlines_by_category_name'][category]" />
                     <tr>
                         <td><t t-esc="index"/>. <t t-esc='category' /></td>
@@ -114,29 +112,29 @@
                         </tr>
                     </table>
                 </tr>
-            </t>
-            <t t-if="!widget.pos.config.category_wise_receipt">
-                <table class='receipt-orderlines'>
-                    <colgroup>
-                        <col width='50%' />
-                        <col width='25%' />
-                        <col width='25%' />
-                    </colgroup>
-                    <tr t-foreach="orderlines" t-as="orderline">
-                        <td>
-                            <t t-if="widget.pos.config.display_image_receipt">
-                                <img class='orderline_image' t-att-src="orderline.get_line_image()"/>
-                            </t>
-                            <t t-esc="orderline.get_product().display_name"/>
-                            <t t-if="orderline.get_discount() > 0">
-                                <div class="pos-disc-font">
-                                With a <t t-esc="orderline.get_discount()"/>% discount
-                                </div>
-                            </t>
-                            <t t-if="widget.pos.config.display_tax_receipt and orderline.get_tax() > 0">
-                                <div class="pos-disc-font">
-                                    Tax: <t t-esc="widget.format_currency(orderline.get_tax())"/>
-                                </div>
+                </t>
+                <t t-if="!widget.pos.config.category_wise_receipt">
+                    <table class='receipt-orderlines'>
+                        <colgroup>
+                            <col width='50%' />
+                            <col width='25%' />
+                            <col width='25%' />
+                        </colgroup>
+                        <tr t-foreach="orderlines" t-as="orderline">
+                            <td>
+                                <t t-if="widget.pos.config.display_image_receipt">
+                                    <img class='orderline_image' t-att-src="orderline.get_line_image()"/>
+                                </t>
+                                <t t-esc="orderline.get_product().display_name"/>
+                                <t t-if="orderline.get_discount() > 0">
+                                    <div class="pos-disc-font">
+                                        With a <t t-esc="orderline.get_discount()"/>% discount
+                                    </div>
+                                </t>
+                                <t t-if="widget.pos.config.display_tax_receipt and orderline.get_tax() > 0">
+                                    <div class="pos-disc-font">
+                                        Tax: <t t-esc="widget.format_currency(orderline.get_tax())"/>
+                                    </div>
                             </t>
                             <t t-if="orderline.get_discount() > 0">
                                 <div class="pos-disc-font">

@@ -1,6 +1,6 @@
 {
     'name': "POS Retail Management",
-    'version': '5.2.3',
+    'version': '5.2.4',
     'category': 'Point of Sale',
     'author': 'TL Technology',
     'live_test_url': 'http://posodoo.com/web/signup',
@@ -48,7 +48,7 @@
         'views/pos_voucher.xml',
         'views/pos_bus.xml',
         'views/mrp_production.xml',
-        'views/pos_sms.xml',
+        # 'views/pos_sms.xml',
         'views/pos_tag.xml',
         'views/pos_note.xml',
         'views/pos_combo_item.xml',

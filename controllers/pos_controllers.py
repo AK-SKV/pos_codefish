@@ -12,7 +12,6 @@ import werkzeug.utils
 
 _logger = logging.getLogger(__name__)
 
-
 class dataset(DataSet):
     @http.route('/web/dataset/search_read', type='json', auth="user")
     def search_read(self, model, fields=False, offset=0, limit=False, domain=None, sort=None):
@@ -22,7 +21,6 @@ class dataset(DataSet):
         if context.get('retail', False):
             request.env['pos.cache.database'].insert_data(datas['records'], model, True)
         return datas
-
 
 class pos_controller(PosController):
 
@@ -115,7 +113,6 @@ class pos_controller(PosController):
         _logger.info('->> end pos_web')
         return request.render('point_of_sale.index', qcontext=context)
 
-
 class web_login(Home):
     @http.route()
     def web_login(self, *args, **kw):
@@ -127,7 +124,6 @@ class web_login(Home):
             if pos_config:
                 return http.local_redirect('/pos/web/')
         return response
-
 
 class pos_bus(BusController):
     def _poll(self, dbname, channels, last, options):

@@ -12,10 +12,10 @@
                     </div>
                 <!--<t t-if="order.date">
                     <div class="pos-center-align"><t t-esc="order.date"/> | <t t-esc="order.name"/></div>
-                </t>
+                </t>-->
                 <t t-set="client" t-value="order.get_client()">
                     Name: <t class="custom-ticket-client-name" t-esc="client['name']"/><br/>
-                </t>-->
+                </t>
                 <t t-if="widget.pos.config.category_wise_receipt">
                     <t t-set='index' t-value="1"/>
                     <tr t-foreach="receipt['orderlines_by_category_name']" t-as="category">
@@ -41,7 +41,13 @@
                             <col width='25%' />
                             <col width='25%' />
                         </colgroup>
+                        <tr class='custom-header'>
+                            <td class='custom-td-ticket'>Item</td>
+                            <td class='custom-td-ticket'>QTY</td>
+                            <td class='custom-td-ticket'>Price</td>
+                        </tr>
                         <tr t-foreach="orderlines" t-as="orderline">
+
                             <td>
                                 <t t-if="widget.pos.config.display_image_receipt">
                                     <img class='orderline_image' t-att-src="orderline.get_line_image()"/>
@@ -103,10 +109,10 @@
                                     </t>
                                 </t>
                             </td>
-                            <td class="pos-right-align">
+                            <td class='custom-td-ticket'>
                                 <t t-esc="orderline.get_quantity_str_with_unit()"/>
                             </td>
-                            <td class="pos-right-align">
+                            <td class='custom-td-ticket'>
                                 <t t-esc="widget.format_currency(orderline.get_display_price())"/>
                             </td>
                         </tr>
@@ -149,7 +155,7 @@
                             <t t-if="orderline.pack_lot_lines and orderline.pack_lot_lines.models">
                                 <t t-foreach="orderline.pack_lot_lines.models" t-as="lot_model">
                                     <div class="pos-disc-font">
-                                        Lot: <t t-esc="lot_model['attributes']['lot_name']"/>
+                                        Bach No.#: <t t-esc="lot_model['attributes']['lot_name']"/>
                                     </div>
                                 </t>
                             </t>

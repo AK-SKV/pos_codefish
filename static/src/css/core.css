@@ -1503,3 +1503,18 @@
 custom-ticket-client-name{
     text-align: left;
 }
+
+.pos .custom-header{
+    text-align: center;
+    font-size: 14px;
+    font-weight: bolder;
+    background: beige;
+}
+
+.pos .pos-sale-ticket table td {
+     border: solid 1px;
+}
+
+.pos .custom-td-ticket{
+    text-align: center;
+}

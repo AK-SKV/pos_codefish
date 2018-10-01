@@ -103,7 +103,7 @@
     <t t-name="reward_button">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-gift' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Reward-Program.png"/></i>
             </div>
             <div class="product-name button_text">
                 Rewards Program
@@ -114,7 +114,7 @@
     <t t-name="button_change_unit">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-sliders' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Change-Unit.png"/></i>
             </div>
             <div class="product-name button_text">
                 Change Unit
@@ -136,7 +136,7 @@
     <t t-name="button_order_note">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-edit' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Add-internal-note.png"/></i>
             </div>
             <div class="product-name button_text">
                 Add Order Note
@@ -147,7 +147,7 @@
     <t t-name="button_order_signature">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-edit' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Signature.png"/></i>
             </div>
             <div class="product-name button_text">
                 Signature order
@@ -169,7 +169,7 @@
     <t t-name="button_print_last_order">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-print' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Print-Last-Order.png"/></i>
             </div>
             <div class="product-name button_text">
                 Receipt last order
@@ -202,7 +202,7 @@
     <t t-name="button_register_payment">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-tag' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Change taxes.png"/></i>
             </div>
             <div class="product-name button_text">
                 Register payment
@@ -356,7 +356,7 @@
     <t t-name="button_go_sale_orders_screen">
         <span class="product left_button">
             <div class="button_icon">
-                <i><img class="custom-icon" src="/pos_retail/static/src/icons/WH-Stock.png"/></i>
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Booked-Orders.png"/></i>
             </div>
             <div class="product-name button_text">
                 Booked Orders
@@ -436,7 +436,7 @@
     <t t-name="button_medical_insurance_screen">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-address-card' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Medical-Insurance.png"/></i>
             </div>
             <t t-if="widget.pos.get_order()">
                 <div class="product-name button_text">
@@ -459,7 +459,7 @@
     <t t-name="button_set_guest">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-address-card' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Set Customer.png"/></i>
             </div>
             <t t-if="widget.pos.get_order()">
                 <div class="product-name button_text">
@@ -482,7 +482,7 @@
     <t t-name="button_reset_sequence">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-list-ol' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Set-Sequence.png"/></i>
             </div>
             <div class="product-name button_text">
                 Reset Sequence
@@ -531,8 +531,8 @@
         <t t-jquery="span[class*='control-button']" t-operation="replace">
             <span class="product left_button">
                 <div class="button_icon">
-                    <i class="fa fa-print"></i>
-                </div>
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Money-in.png"/></i>
+            </div>
                 <div class="product-name button_text">
                     Bill
                 </div>
@@ -582,7 +582,7 @@
     <t t-name="button_cash_in">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-arrow-left' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Money-in.png"/></i>
             </div>
             <div class="product-name button_text">
                 Put money in
@@ -592,8 +592,8 @@
 
     <t t-name="button_cash_out">
         <span class="product left_button">
-            <div class="button_icon">
-                <i class='fa fa-arrow-right' />
+         <div class="button_icon">
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Money-Out.png"/></i>
             </div>
             <div class="product-name button_text">
                 Take money out

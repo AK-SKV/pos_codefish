@@ -425,7 +425,7 @@
     <t t-name="button_restart_session">
         <span class="product left_button">
             <div class="button_icon">
-                <i><img class="custom-icon" src="/pos_retail/static/src/icons/User.png"/></i>
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/POS.png"/></i>
             </div>
             <div class="product-name button_text">
                 <t t-esc="widget.pos.get_config()['name']"/>
@@ -493,7 +493,7 @@
     <t t-name="button_change_tax">
         <span class="product left_button">
             <div class="button_icon">
-                <i class='fa fa-tag' />
+                <i><img class="custom-icon" src="/pos_retail/static/src/icons/Change_taxes.png"/></i>
             </div>
             <div class="product-name button_text">
                 Change taxes
